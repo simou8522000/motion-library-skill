@@ -1,0 +1,468 @@
+<title>قاموس الموشن</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@500;700&family=Monoton&family=Playfair+Display:wght@900&family=Tajawal:wght@400;500;700;800;900&display=swap">
+<style>
+/* Layout: header, sticky filter bar, grid of cards each holding a looping 9:16 mini stage, sticky pick tray */
+:root{
+  --bg:#F4F3FA;--panel:#FFFFFF;--ink:#16182E;--muted:#5E6185;--line:#E2E0EF;
+  --accent:#5B3FD9;--on-accent:#FFFFFF;--chip:#ECE8FD;--chip-ink:#3A2A9A;
+  --user:#0E7C66;--user-bg:#DDF4EC;
+  --ar:"Tajawal",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Consolas,monospace;--poster:"Anton","Tajawal",Impact,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0C0E1B;--panel:#151930;--ink:#ECEBFA;--muted:#A2A5C6;--line:#262B4A;
+  --accent:#9A88FF;--on-accent:#0C0E1B;--chip:#221E48;--chip-ink:#CFC6FF;--user:#5FD9B6;--user-bg:#10332A;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0C0E1B;--panel:#151930;--ink:#ECEBFA;--muted:#A2A5C6;--line:#262B4A;
+  --accent:#9A88FF;--on-accent:#0C0E1B;--chip:#221E48;--chip-ink:#CFC6FF;--user:#5FD9B6;--user-bg:#10332A;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--ar);direction:rtl}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--bg)}
+.wrap{max-width:1200px;margin:0 auto;padding-block:32px 140px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{display:grid;gap:6px;margin-bottom:18px}
+h1{font:900 clamp(30px,6vw,52px)/1.1 var(--ar);margin:0;text-wrap:balance}
+h1 span{color:var(--accent)}
+.lede{margin:0;color:var(--muted);max-width:62ch}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);padding-block:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-bottom:1px solid var(--line);margin-bottom:20px}
+.bar input{font:500 15px var(--ar);padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);min-width:0;flex:1 1 180px;max-width:260px}
+.chip{font:700 14px var(--ar);padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.chip small{font:500 12px var(--mono);opacity:.75;margin-inline-start:4px}
+.chip:focus-visible,.pk:focus-visible,.st:focus-visible,.tray button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sec{font:800 20px var(--ar);margin:28px 0 12px;display:flex;align-items:baseline;gap:10px}
+.sec small{font:500 13px var(--ar);color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));gap:16px}
+.it{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.it.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:6px;direction:ltr}
+.nm{font:700 14px var(--mono);color:var(--ink);overflow-wrap:anywhere}
+.pk{flex:none;width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--chip);color:var(--chip-ink);font:700 18px/1 var(--mono);cursor:pointer}
+.it.on .pk{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.ds{margin:0;font:500 14px/1.5 var(--ar)}
+.us{margin:0;font:400 12.5px/1.5 var(--ar);color:var(--muted)}
+.src{align-self:flex-start;font:700 11px var(--ar);padding:2px 8px;border-radius:999px;background:var(--chip);color:var(--chip-ink);letter-spacing:.02em}
+.src.u{background:var(--user-bg);color:var(--user)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.fx{font:700 11px var(--ar);padding:2px 8px;border-radius:999px;background:var(--accent);color:var(--on-accent)}
+.op{margin:0;font:700 11px/1.6 var(--ar);color:var(--ink)}
+.op code{display:block;font:400 11.5px/1.6 var(--mono);color:var(--muted);direction:ltr;text-align:left;overflow-wrap:anywhere}
+.empty{color:var(--muted);padding:40px 0;text-align:center}
+.tray{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--panel);border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding-block:10px calc(10px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.tray p{margin:0;flex:1 1 220px;min-width:0;font:700 14px var(--mono);direction:ltr;text-align:right;overflow-wrap:anywhere}
+.tray p b{font:800 14px var(--ar);color:var(--muted)}
+.tray button{font:800 14px var(--ar);padding:8px 14px;border-radius:10px;border:1px solid var(--accent);cursor:pointer;background:var(--accent);color:var(--on-accent)}
+.tray button.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.copied{font:700 13px var(--ar);color:var(--user)}
+
+/* ---------- mini stage (a phone frame, same look in both themes) ---------- */
+.st{position:relative;aspect-ratio:9/16;width:100%;max-width:100%;border-radius:10px;overflow:hidden;background:#151A33;container-type:inline-size;cursor:pointer;isolation:isolate;direction:ltr}
+.st *{position:absolute;font-style:normal}
+.it:not(.run) .st *, .it:not(.run) .st *::before, .it:not(.run) .st *::after{animation-play-state:paused!important}
+@media (prefers-reduced-motion:reduce){.it:not(:hover):not(:focus-within) .st *,.it:not(:hover):not(:focus-within) .st *::before,.it:not(:hover):not(:focus-within) .st *::after{animation-play-state:paused!important}}
+.st .rm{inset:0;z-index:0;background:
+  linear-gradient(#2E3878,#2E3878) 10% 12%/30% 20% no-repeat,
+  linear-gradient(#232B5E,#232B5E) 90% 24%/18% 36% no-repeat,
+  linear-gradient(#20275A,#20275A) 0 100%/100% 16% no-repeat,
+  var(--rmc,#151A33)}
+.st .rm.r2{--rmc:#40182F}
+.st .p{left:50%;bottom:0;width:58%;height:60%;transform:translateX(-50%);z-index:2}
+.st .p::before{content:"";position:absolute;left:28%;top:1%;width:44%;aspect-ratio:1;border-radius:50%;background:radial-gradient(120% 62% at 50% 0,#2A1C15 54%,transparent 56%),#E6C3A0}
+.st .p::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:72%;border-radius:46% 46% 0 0;background:#7C6CF2}
+.st .cam{inset:0;z-index:2;overflow:hidden}
+.st .k{animation:var(--k) 4s cubic-bezier(.2,.8,.2,1) var(--d,0s) infinite both}
+.st .reel{width:22%;aspect-ratio:9/16;border-radius:4px;z-index:1;box-shadow:0 2px 6px #0008}
+.g1{background:linear-gradient(160deg,#FF7A59,#FFC46B)}.g2{background:linear-gradient(160deg,#38BDF8,#6D5BEF)}.g3{background:linear-gradient(160deg,#F472B6,#8B5CF6)}.g4{background:linear-gradient(160deg,#34D399,#0EA5E9)}.g5{background:linear-gradient(160deg,#FBBF24,#F97316)}
+.st .wc{background:#fff;color:#16182E;border-radius:6px;box-shadow:0 4px 10px #0007;z-index:3;font:700 5.6cqw/1.25 var(--ar);direction:rtl}
+.st .wc *{position:static}
+.st .glass{background:#ffffff26;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);border:1px solid #ffffff60;border-radius:9px;z-index:3;color:#fff}
+.st .glass *{position:static}
+.st .ln{display:block;height:2.6cqw;border-radius:2px;background:#cfcce3;margin:2.2cqw 0}
+.st .big{left:0;right:0;text-align:center;font:30cqw/1 var(--poster);letter-spacing:.01em;z-index:1}
+.st .cap{left:4%;right:4%;bottom:12%;text-align:center;font:900 10cqw/1.15 var(--ar);color:#fff;text-shadow:0 .6cqw 0 #000a;z-index:4;direction:rtl}
+.st .cap *{position:static;display:inline-block}
+.st svg{inset:0;width:100%;height:100%;z-index:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.st svg *{position:static}
+.st .dr{stroke-dasharray:1;animation:draw 4s ease var(--d,0s) infinite both}
+.st .sc{top:0;bottom:0;width:50%;overflow:hidden}
+.st .sc>*{position:absolute}
+
+@property --n{syntax:"<integer>";inherits:false;initial-value:0}
+
+@keyframes pop{0%,4%{opacity:0;transform:var(--t0,translate(0)) scale(.3)}14%{opacity:1;transform:var(--t0,translate(0)) scale(1.12)}20%,82%{opacity:1;transform:var(--t0,translate(0)) scale(1)}92%,100%{opacity:0;transform:var(--t0,translate(0)) scale(1)}}
+@keyframes drop{0%,4%{opacity:0;transform:var(--t0,translate(0)) translateY(-130%)}16%{opacity:1;transform:var(--t0,translate(0)) translateY(5%)}22%,82%{opacity:1;transform:var(--t0,translate(0))}92%,100%{opacity:0;transform:var(--t0,translate(0))}}
+@keyframes rise{0%,4%{opacity:0;transform:var(--t0,translate(0)) translateY(60%)}18%,82%{opacity:1;transform:var(--t0,translate(0))}92%,100%{opacity:0;transform:var(--t0,translate(0))}}
+@keyframes fromL{0%,4%{opacity:0;transform:var(--t0,translate(0)) translateX(-140%)}14%{opacity:1;transform:var(--t0,translate(0)) translateX(6%)}20%,82%{opacity:1;transform:var(--t0,translate(0))}92%,100%{opacity:0;transform:var(--t0,translate(0))}}
+@keyframes fromR{0%,4%{opacity:0;transform:var(--t0,translate(0)) translateX(140%)}14%{opacity:1;transform:var(--t0,translate(0)) translateX(-6%)}20%,82%{opacity:1;transform:var(--t0,translate(0))}92%,100%{opacity:0;transform:var(--t0,translate(0))}}
+@keyframes fade{0%,4%{opacity:0}18%,82%{opacity:1}94%,100%{opacity:0}}
+@keyframes wipe{0%,4%{clip-path:inset(0 100% 0 0)}24%,82%{clip-path:inset(0 0 0 0)}94%,100%{clip-path:inset(0 0 0 100%)}}
+@keyframes wipeR{0%,4%{clip-path:inset(0 0 0 100%)}24%,82%{clip-path:inset(0 0 0 0)}94%,100%{clip-path:inset(0 100% 0 0)}}
+@keyframes draw{0%,6%{stroke-dashoffset:1;opacity:1}34%,84%{stroke-dashoffset:0;opacity:1}94%,100%{stroke-dashoffset:0;opacity:0}}
+@keyframes lock{0%,6%{opacity:0;transform:scale(1.8)}18%{opacity:1;transform:scale(.94)}24%,84%{opacity:1;transform:scale(1)}94%,100%{opacity:0;transform:scale(1)}}
+@keyframes follow{0%,100%{transform:translateX(-12%)}50%{transform:translateX(12%)}}
+@keyframes orbit{
+  0%{transform:translate(-50%,-50%) translate(0,-28%) scale(.72);z-index:1}
+  12.5%{transform:translate(-50%,-50%) translate(127%,-20%) scale(.8);z-index:1}
+  25%{transform:translate(-50%,-50%) translate(180%,0) scale(.88);z-index:1}
+  37.5%{transform:translate(-50%,-50%) translate(127%,20%) scale(.95);z-index:3}
+  50%{transform:translate(-50%,-50%) translate(0,28%) scale(1);z-index:3}
+  62.5%{transform:translate(-50%,-50%) translate(-127%,20%) scale(.95);z-index:3}
+  75%{transform:translate(-50%,-50%) translate(-180%,0) scale(.88);z-index:1}
+  87.5%{transform:translate(-50%,-50%) translate(-127%,-20%) scale(.8);z-index:1}
+  100%{transform:translate(-50%,-50%) translate(0,-28%) scale(.72);z-index:1}}
+@keyframes punch{0%,28%{transform:scale(1)}32%,70%{transform:scale(1.3)}74%,100%{transform:scale(1)}}
+@keyframes print{0%,6%{clip-path:inset(0 0 100% 0);opacity:1}44%,82%{clip-path:inset(0 0 0 0);opacity:1}94%,100%{clip-path:inset(0 0 0 0);opacity:0}}
+@keyframes grade{0%,28%{filter:none}44%,84%{filter:saturate(.45) contrast(1.3) brightness(.78) sepia(.35) hue-rotate(-12deg)}100%{filter:none}}
+@keyframes reveal{0%,10%,90%,100%{clip-path:inset(0 18% 0 0)}50%{clip-path:inset(0 82% 0 0)}}
+@keyframes hand{0%,10%,90%,100%{left:82%}50%{left:18%}}
+@keyframes typ{0%,14%{max-width:0}54%,100%{max-width:100%}}
+@keyframes postc{0%,58%{color:#b8b8c8}62%,100%{color:#0095F6}}
+@keyframes on1{0%,44%{opacity:1}48%,100%{opacity:0}}
+@keyframes on2{0%,44%{opacity:0}48%,100%{opacity:1}}
+@keyframes squash{0%,40%,52%,100%{transform:translateX(-50%) scale(1)}45%{transform:translateX(-50%) scale(.9)}}
+@keyframes ripple{0%,38%{transform:translate(-50%,-50%) scale(0);opacity:0}42%{opacity:.7}56%,100%{transform:translate(-50%,-50%) scale(2.6);opacity:0}}
+@keyframes freeze{0%,30%{filter:none;transform:none}33%,85%{filter:grayscale(.85) contrast(1.15);transform:scale(1.05)}100%{filter:none;transform:none}}
+@keyframes flash{0%,30%{opacity:0}32%{opacity:.85}38%,100%{opacity:0}}
+@keyframes jit{0%,58%{transform:none;filter:none}60%{transform:translateX(-6%) skewX(8deg);filter:hue-rotate(90deg) saturate(3)}62%{transform:translateX(5%)}64%{transform:none;filter:none}74%{transform:none}76%{transform:translateX(-4%);filter:invert(.25)}78%,100%{transform:none;filter:none}}
+@keyframes fill{0%,8%{width:0}80%,100%{width:100%}}
+@keyframes slices{0%,58%{opacity:0}60%,64%{opacity:.9}66%,75%{opacity:0}76%,78%{opacity:.9}80%,100%{opacity:0}}
+@keyframes shrink{0%,18%{transform:none;border-radius:0}38%,80%{transform:scale(.68) translate(-10%,-8%);border-radius:14px}96%,100%{transform:none;border-radius:0}}
+@keyframes fall{from{transform:translateY(0) rotate(0)}to{transform:translateY(1700%) rotate(50deg)}}
+@keyframes stamp{0%,26%{opacity:0;transform:translate(-50%,-50%) rotate(-14deg) scale(2.6)}30%{opacity:.95;transform:translate(-50%,-50%) rotate(-14deg) scale(.94)}34%,84%{opacity:.95;transform:translate(-50%,-50%) rotate(-14deg) scale(1)}94%,100%{opacity:0;transform:translate(-50%,-50%) rotate(-14deg) scale(1)}}
+@keyframes hit{0%,29%{transform:none}31%{transform:translate(3%,-2%)}33%{transform:translate(-3%,2%)}35%{transform:translate(2%,1%)}37%,100%{transform:none}}
+@keyframes flip{0%{opacity:1;transform:rotateX(90deg)}4%,27%{opacity:1;transform:rotateX(0)}30%{opacity:1;transform:rotateX(-90deg)}31%,100%{opacity:0;transform:rotateX(-90deg)}}
+@keyframes tunnel{0%{transform:translate(-50%,-50%) scale(0);opacity:0}15%{opacity:1}100%{transform:translate(-50%,-50%) scale(1.7);opacity:1}}
+@keyframes bob{from{transform:translateY(-4%)}to{transform:translateY(4%)}}
+@keyframes hdown{0%,12%{transform:translateY(-102%)}30%,80%{transform:translateY(0)}95%,100%{transform:translateY(-102%)}}
+@keyframes pushd{0%,12%{transform:none}30%,80%{transform:translateY(24%)}95%,100%{transform:none}}
+@keyframes pillon{0%,46%{background:#fff;color:#2563EB}50%,88%{background:#2563EB;color:#fff}}
+@keyframes play{0%{left:0}100%{left:100%}}
+@keyframes cnt{0%,10%{--n:0}70%,100%{--n:128}}
+@keyframes cnt2{0%,10%{--n:0}60%,100%{--n:87}}
+@keyframes cnt3{0%,8%{--n:0}55%,100%{--n:97}}
+@keyframes fly{0%,30%{transform:translate(210%,700%) scale(1.5) rotate(40deg);opacity:0}34%{opacity:1}58%,84%{transform:translate(0,0) scale(1) rotate(0);opacity:1}94%,100%{opacity:0;transform:translate(0,0)}}
+@keyframes pan{from{background-position:0 0,0 0}to{background-position:-60cqw 0,-30cqw 0}}
+@keyframes fan{0%,10%{transform:translateX(-50%) rotate(0)}30%,80%{transform:translateX(-50%) rotate(var(--a))}95%,100%{transform:translateX(-50%) rotate(0)}}
+@keyframes dotc{0%,10%{filter:blur(6px) brightness(.35);transform:scale(1.06)}55%,86%{filter:none;transform:scale(1)}100%{filter:blur(6px) brightness(.35);transform:scale(1.06)}}
+@keyframes doto{0%,10%{opacity:1}55%,86%{opacity:0}100%{opacity:1}}
+@keyframes spinY{from{transform:rotateY(0)}to{transform:rotateY(-360deg)}}
+@keyframes mc{0%,24.5%{opacity:1}25%,100%{opacity:0}}
+@keyframes tgon{0%,10%{background:#3A3A3C}16%,86%{background:#34C759}96%,100%{background:#3A3A3C}}
+@keyframes knob{0%,10%{transform:translateX(0)}16%,86%{transform:translateX(-90%)}96%,100%{transform:translateX(0)}}
+@keyframes dim{0%,12%{opacity:0}26%,86%{opacity:.82}100%{opacity:0}}
+@keyframes ledtype{0%,26%{max-width:0}62%,100%{max-width:100%}}
+@keyframes slowpush{from{transform:scale(1)}to{transform:scale(1.2)}}
+@keyframes melt{from{filter:blur(0)}to{filter:blur(4px)}}
+@keyframes ots{0%,8%{transform:scale(1)}20%,42%{transform:scale(1.55) translate(14%,12%)}54%,78%{transform:scale(1.55) translate(-14%,12%)}90%,100%{transform:scale(1)}}
+@keyframes win1{0%,18%{opacity:0;transform:scale(.6)}24%,42%{opacity:1;transform:scale(1)}46%,100%{opacity:0;transform:scale(1)}}
+@keyframes win2{0%,52%{opacity:0;transform:scale(.6)}58%,78%{opacity:1;transform:scale(1)}82%,100%{opacity:0;transform:scale(1)}}
+@keyframes pig{0%,14%{transform:none;border-radius:0}34%,82%{transform:scale(.31);border-radius:6px}97%,100%{transform:none;border-radius:0}}
+@keyframes hl{0%,2%{background:transparent;color:#fff;transform:scale(1)}6%,30%{background:#FFE14D;color:#16182E;transform:scale(1.1)}34%,100%{background:transparent;color:#fff;transform:scale(1)}}
+@keyframes caret{50%{border-color:transparent}}
+@keyframes mark{0%,15%{background-size:0% 42%}42%,86%{background-size:100% 42%}100%{background-size:0% 42%}}
+@keyframes whip{0%,36%{transform:translateX(0);filter:none}44%{filter:blur(5px)}52%,86%{transform:translateX(-50%);filter:none}100%{transform:translateX(-50%)}}
+@keyframes zA{0%,34%{transform:scale(1);opacity:1;filter:none}48%{transform:scale(3.2);filter:blur(6px);opacity:1}49%,100%{opacity:0;transform:scale(3.2)}}
+@keyframes zB{0%,48%{opacity:0;transform:scale(2.6);filter:blur(6px)}49%{opacity:1;transform:scale(2.6);filter:blur(6px)}62%,100%{opacity:1;transform:scale(1);filter:none}}
+@keyframes gA{0%,42%{opacity:1;transform:none;filter:none}44%{transform:translateX(-7%);filter:hue-rotate(90deg) saturate(3)}46%{transform:translateX(6%)}48%{transform:translateX(-3%) skewX(10deg)}50%,100%{opacity:0}}
+@keyframes gB{0%,49%{opacity:0}50%{opacity:1;transform:translateX(7%);filter:hue-rotate(-90deg) saturate(3)}52%{transform:translateX(-5%) skewX(-8deg)}55%,100%{opacity:1;transform:none;filter:none}}
+@keyframes gS{0%,41%{opacity:0}42%,56%{opacity:.9}57%,100%{opacity:0}}
+@keyframes circ{0%,30%{clip-path:circle(0% at 50% 46%)}58%,100%{clip-path:circle(85% at 50% 46%)}}
+@keyframes push{0%,34%{transform:translateY(0)}54%,90%{transform:translateY(-50%)}100%{transform:translateY(-50%)}}
+@keyframes leak{0%{transform:translate(-90%,-30%);opacity:0}30%{opacity:.95}62%{transform:translate(50%,30%);opacity:.9}84%,100%{transform:translate(90%,50%);opacity:0}}
+@keyframes shake{0%,30%{transform:none}32%{transform:translate(-4%,2%) rotate(-1.5deg)}34%{transform:translate(4%,-2%) rotate(1.5deg)}36%{transform:translate(-3%,-1%)}38%{transform:translate(2%,2%)}40%,100%{transform:none}}
+@keyframes jc{0%,32%{transform:none}33%,65%{transform:scale(1.32) translateY(5%)}66%,100%{transform:scale(1.14) translateX(-7%)}}
+@keyframes par{0%,100%{transform:translateX(calc(var(--px) * -1))}50%{transform:translateX(var(--px))}}
+@keyframes kb{from{transform:scale(1) translate(0,0)}to{transform:scale(1.3) translate(-8%,-5%)}}
+@keyframes pipm{0%,14%{inset:0;border-radius:0}34%,82%{inset:64% 6% 6% 50%;border-radius:12px}97%,100%{inset:0;border-radius:0}}
+@keyframes scroll{0%,30%{transform:translateY(0)}80%,100%{transform:translateY(-30%)}}
+@keyframes splitc{0%,14%{transform:none;clip-path:inset(0 0 0 0)}32%,82%{transform:translateY(22%);clip-path:inset(28% 0 0 0)}96%,100%{transform:none;clip-path:inset(0 0 0 0)}}
+@keyframes bar{from{width:0}to{width:100%}}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>قاموس <span>الموشن</span></h1>
+    <p class="lede">كل حركة عندها سمية ومثال كيتحرك. اضغط على <b>+</b> باش تختار الحركات اللي عجبوك، ومن بعد نسخ الأسماء وصيفطهم ليا. اضغط على أي مثال باش يعاود من الأول.</p>
+    <p class="lede">الحركات اللي عليها <span class="fx">كتخدم فـ <bdi dir="ltr">/effects</bdi></span> ولاو كيترندرو على الفيديو الحقيقي ديالك (الوجه متبوع والنص ورا الراس). تحت كل وحدة كاينين الخيارات اللي تقدر تبدل.</p>
+  </header>
+  <div class="bar" id="bar">
+    <input id="q" type="search" placeholder="قلب: orbit، زوم، نص…" aria-label="قلب على حركة">
+  </div>
+  <main id="list"></main>
+</div>
+<div class="tray" id="tray" hidden>
+  <p id="picked"></p>
+  <span class="copied" id="copied" hidden>تنسخات</span>
+  <button id="copy" type="button">نسخ الأسماء</button>
+  <button id="clear" type="button" class="ghost">مسح</button>
+</div>
+
+<script>
+const R='<i class="rm"></i>', R2='<i class="rm r2"></i>', P='<i class="p"></i>';
+const k=(cls,anim,d,extra,inner)=>`<i class="${cls} k" style="--k:${anim};--d:${d}s;${extra||''}">${inner||''}</i>`;
+const reel=(g,l,t,r,d,anim)=>`<i class="reel ${g} k" style="left:${l}%;top:${t}%;--k:${anim||'drop'};--t0:rotate(${r}deg);--d:${d}s"></i>`;
+const lines=n=>Array.from({length:n},(_,i)=>`<i class="ln" style="width:${[100,80,92,64,86][i%5]}%"></i>`).join('');
+
+const CATS={back:'ورا الراس',cam:'حركة الكاميرا',text:'النص والعناوين',ui:'كروت وواجهات',frame:'تكوين الكادر',trans:'الانتقالات',look:'اللون والإضاءة',acc:'لمسات'};
+
+/* effects the /effects skill renders on real footage, with its options (| separates list items) */
+const FX={
+  'noise':'images, size','lineup':'text (a|b|c)','locked-on':'zoom (1.35), text','orbit':'images, count, speed, size',
+  'lean-in':'zoom (1.45, max 2), speed','backdrop-word':'text, color, font (bold | serif)',
+  'spotlight':'text, color, push · look=sparkle (glitter-spotlight)','the-bill':'text (lines with |)',
+  'moody':'grade (moody, bw, warm, cool, pop)','swipe':'grade','todo':'text (items with |), ticks, title',
+  'comment-box':'text','tap':'at, x, y, color','pause-point':'text, color, label_x','uninstall':'text','reel-frame':'text (handle)',
+  'shortcut-rain':'text (keys with |), count','reject-stamp':'text, color, angle, y','countdown-flip':'from',
+  'rabbit-hole':'ratio, speed, spin','cover-star':'text, lines, issue, color · look=editorial','scribble':'text, color',
+  'glass-widgets':'text, name, handle, look=simple','red-collage':'text, lines, tag','split-headline':'text, hl, pill',
+  'pastel-word':'text, name, handle','check-pills':'text (pills with |), images','timeline':'text, sub, tc',
+  'headline-box':'text (2 lines), zoom','profile-wall':'images, count, label','tier-list':'title, item, others',
+  'broll-split':'images, text (tag)','phone-fan':'images, text','dot-reveal':'color, cell',
+  'headline-wall':'text (headline::meta|…), total, label','checklist':'text (step::meta|…), title',
+  'liquid-glass-graph':'text, from, to, color · look=bento','carousel-spin':'images, count, size, turns',
+  'match-cut':'text, color','apple-toggles':'text (rows with |), ticks, color, pos=below','led-sign':'text, color, push',
+  'slow-push':'zoom (1.6), blur','over-the-shoulder-zoom':'text (2 labels), to (197K|672K), zoom',
+  'messages':'text (messages with |), title, y','place-in-grid':'images, views (9 counts)'
+};
+
+const D=[
+/* ---------- ورا الراس ---------- */
+['noise','back','u','الريلز ديالك كيطيحو وكيتكدسو ورا راسك','مزيانة ل: تبيين الخدمة ديالك وبورتفوليو',
+ R+reel('g1',8,20,-12,0)+reel('g2',30,12,6,.15)+reel('g3',52,18,-5,.3)+reel('g4',70,14,10,.45)+reel('g5',18,32,4,.6)+reel('g2',60,30,-8,.75)+P],
+['orbit','back','u','الريلز كيدورو على راسك، ورا منك فالفوق وقدامك فالتحت','مزيانة ل: بورتفوليو بطريقة فخمة',
+ R+P+[0,-.8,-1.6,-2.4,-3.2].map((d,i)=>`<i class="reel g${i+1}" style="left:50%;top:47%;width:17%;animation:orbit 4s linear ${d}s infinite"></i>`).join('')],
+['backdrop-word','back','u','كلمة كبيرة كتطيح ورا منك (كيسميوها حتى text behind subject)','مزيانة ل: الكلمة المفتاح ديال الفكرة',
+ R+`<b class="big k" style="--k:drop;top:17%;color:#38BDF8">WOW</b>`+P],
+['shortcut-rain','back','u','أزرار الكلافيي كيطيحو بحال الشتا ورا منك','مزيانة ل: التيك، الاختصارات والأدوات',
+ R+[['⌘',6,-.2],['C',24,-1.4],['V',44,-.7],['⇧',62,-2],['⌥',80,-1],['K',14,-2.3],['Z',70,-.4],['⏎',36,-1.8]].map(([c,l,d])=>`<b style="left:${l}%;top:-12%;width:13%;aspect-ratio:1;border-radius:3cqw;background:#F1F0F8;box-shadow:0 1cqw 0 #9a98b5;color:#16182E;font:700 6cqw/13cqw var(--mono);text-align:center;z-index:1;animation:fall 2.4s linear ${d}s infinite">${c}</b>`).join('')+P],
+['rabbit-hole','back','u','البيت كيتحول نفق ورا منك','مزيانة ل: تدخل فموضوع عميق',
+ '<i style="inset:0;background:#07081A;z-index:0"></i>'+[0,-.8,-1.6,-2.4,-3.2].map((d,i)=>`<i style="left:50%;top:44%;width:100%;aspect-ratio:9/16;border:2px solid ${i%2?'#38BDF8':'#8B78FF'};border-radius:10px;z-index:1;animation:tunnel 4s linear ${d}s infinite"></i>`).join('')+P],
+['headline-wall','back','u','عناوين كيتكدسو ورا راسك، ومن بعد رقم كيبان قدامك','مزيانة ل: الدليل الاجتماعي والأخبار',
+ R+[[6,8,-6,0],[38,16,5,.25],[10,26,3,.5],[34,34,-4,.75]].map(([l,t,r,d])=>`<i class="wc k" style="left:${l}%;top:${t}%;width:56%;padding:2.4cqw;z-index:1;--k:drop;--t0:rotate(${r}deg);--d:${d}s"><i class="ln" style="background:#16182E;margin:0 0 1.6cqw"></i><i class="ln" style="width:70%;margin:0"></i></i>`).join('')+P+`<b class="wc k" style="left:50%;bottom:10%;padding:2cqw 4cqw;font:900 11cqw/1 var(--ar);color:#5B3FD9;--k:pop;--t0:translateX(-50%);--d:1.4s">+320%</b>`],
+['carousel-spin','back','u','الريلز كيدورو عليك بحال كاروسيل 3D','مزيانة ل: بورتفوليو',
+ R+`<div style="left:39%;top:30%;width:22%;aspect-ratio:9/16;perspective:300px;z-index:1"><div style="inset:0;transform-style:preserve-3d;animation:spinY 6s linear infinite">${[0,60,120,180,240,300].map((a,i)=>`<i class="g${i%5+1}" style="inset:0;border-radius:4px;transform:rotateY(${a}deg) translateZ(30cqw);opacity:.92"></i>`).join('')}</div></div>`+P],
+['match-cut','back','u','صفحات أخبار كيتبدلو على نفس الكلمة، والكلمة ثابتة فبلاصتها','مزيانة ل: ترند كيهضرو عليه الكل',
+ R+[['#FFFFFF',0],['#F3EBDD',-3],['#E6EEFF',-2],['#FFE9E9',-1]].map(([c,d])=>`<i class="wc" style="left:8%;right:8%;top:6%;height:40%;padding:3cqw;z-index:1;background:${c};animation:mc 4s steps(1) ${d}s infinite"><i class="ln" style="background:#16182E;height:4cqw"></i>${lines(4)}</i>`).join('')+`<b style="left:28%;top:23%;z-index:1;background:#FFE14D;color:#16182E;font:900 7cqw/1.2 var(--ar);padding:0 2cqw">AI</b>`+P],
+['led-sign','back','u','الضو كيطفا ولافتة LED كتكتب راسها ورا منك','مزيانة ل: جو ليلي واسم البراند',
+ R+'<i style="inset:0;background:#000;z-index:1;animation:dim 4s infinite"></i>'+`<b style="left:0;right:0;top:20%;text-align:center;z-index:1"><span style="position:relative;display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:top;font:12cqw/1.2 Monoton,var(--mono);color:#FFD1F4;text-shadow:0 0 2cqw #FF4FD8,0 0 5cqw #FF4FD8;animation:ledtype 4s steps(9) infinite">ASTRA</span></b>`+P],
+['profile-wall','back','u','شبكة الريلز كتعمر الحيط والعداد كيطلع','مزيانة ل: النتائج وعدد الفولوورز',
+ R+[0,1,2].flatMap(r=>[0,1,2].map(c=>`<i class="reel g${(r*3+c)%5+1} k" style="width:28%;left:${5+c*31}%;top:${4+r*29}%;--k:pop;--d:${(r*3+c)*.1}s"></i>`)).join('')+P+`<b class="wc" style="left:50%;top:6%;transform:translateX(-50%);padding:2cqw 4cqw;z-index:4;font:900 10cqw/1 var(--mono);color:#16182E;counter-reset:n var(--n);animation:cnt 4s infinite"><span class="cntx"></span></b>`],
+['red-collage','back','u','نتا بالأبيض والكحل، كلمة حمرا كبيرة ورا منك، و3 سطور كيضربو','مزيانة ل: Hook قوي بستايل بوستر',
+ '<i style="inset:0;background:#EEE9E2;z-index:0"></i>'+`<b class="big k" style="--k:drop;top:16%;color:#E02424;font-size:34cqw">STOP</b>`+'<i class="p" style="filter:grayscale(1) contrast(1.3)"></i>'+[['بلا موقع',58,.8],['بلا كليان',68,1],['بلا نتيجة',78,1.2]].map(([t,y,d])=>`<b class="k" style="left:6%;top:${y}%;z-index:3;background:#111;color:#fff;font:800 6.4cqw/1.3 var(--ar);padding:.6cqw 2.4cqw;--k:fromL;--d:${d}s">${t}</b>`).join('')],
+['pastel-word','back','u','بيت لون الخزامى، كلمة كبيرة ورا منك، وكارطة بروفايل كتتبّع','مزيانة ل: براند ناعم ورزين',
+ '<i style="inset:0;background:#E6DEFB;z-index:0"></i>'+`<b class="big k" style="--k:rise;top:16%;color:#8B78FF">SOFT</b>`+P+`<div class="wc k" style="left:8%;right:8%;bottom:7%;padding:2.4cqw;display:flex;align-items:center;gap:2cqw;--k:rise;--d:.4s"><i style="width:9cqw;height:9cqw;border-radius:50%;background:#7C6CF2;flex:none"></i><i style="flex:1"><i class="ln" style="margin:0 0 1.4cqw;width:80%;background:#16182E"></i><i class="ln" style="margin:0;width:50%"></i></i><b style="position:relative;width:20cqw;height:7cqw;flex:none;font:700 4.2cqw/7cqw var(--ar);text-align:center"><span style="position:absolute;inset:0;border-radius:2cqw;background:#0095F6;color:#fff;animation:on1 4s infinite">تابع</span><span style="position:absolute;inset:0;border-radius:2cqw;background:#EFEFEF;color:#111;animation:on2 4s infinite">متابَع</span></b></div>`],
+['check-pills','back','u','ورق مربعات، الريلز ديالك ملصقين ورا منك، وأزرار زرقا كيتكليكاو','مزيانة ل: الخدمات والاختيارات',
+ '<i style="inset:0;background:linear-gradient(#dfe3f0 1px,transparent 1px) 0 0/8cqw 8cqw,linear-gradient(90deg,#dfe3f0 1px,transparent 1px) 0 0/8cqw 8cqw,#F7F8FC;z-index:0"></i>'+[[8,10,-6],[39,6,3],[70,12,7]].map(([l,t,r],i)=>`<i class="reel g${i+2}" style="left:${l}%;top:${t}%;transform:rotate(${r}deg)"><i style="left:44%;top:-4%;width:12%;aspect-ratio:1;border-radius:50%;background:#E02424"></i></i>`).join('')+P+[['تصميم',62,.3],['متجر',72,.8],['إعلانات',82,1.3]].map(([t,y,d])=>`<b style="right:8%;top:${y}%;z-index:3;border:2px solid #2563EB;border-radius:999px;padding:.4cqw 3cqw;font:800 5.4cqw/1.4 var(--ar);animation:pop 4s ${d}s infinite both,pillon 4s ${d}s infinite both">${t} ✓</b>`).join('')],
+
+/* ---------- حركة الكاميرا ---------- */
+['locked-on','cam','u','أقواس كيتسدّو على وجهك والكاميرا كتبعك','مزيانة ل: بداية الفيديو والـHook',
+ R+`<div style="inset:0;z-index:2;animation:follow 4s ease-in-out infinite">${P}<i class="k" style="left:30%;top:37%;width:40%;height:23%;--k:lock;background:linear-gradient(#fff,#fff) 0 0/24% 2px,linear-gradient(#fff,#fff) 0 0/2px 24%,linear-gradient(#fff,#fff) 100% 0/24% 2px,linear-gradient(#fff,#fff) 100% 0/2px 24%,linear-gradient(#fff,#fff) 0 100%/24% 2px,linear-gradient(#fff,#fff) 0 100%/2px 24%,linear-gradient(#fff,#fff) 100% 100%/24% 2px,linear-gradient(#fff,#fff) 100% 100%/2px 24%;background-repeat:no-repeat;z-index:3"><b style="left:3%;top:-14%;font:700 3.6cqw var(--mono);color:#38BDF8">LOCK</b></i></div>`],
+['lean-in','cam','u','زوم سريع على كلمة وحدة','مزيانة ل: تأكيد كلمة مهمة',
+ `<div class="cam" style="transform-origin:50% 46%;animation:punch 4s cubic-bezier(.7,0,.2,1) infinite">${R+P}</div><b class="cap k" style="--k:pop;--d:.75s">مجاني</b>`],
+['slow-push','cam','u','زوم سينمائي بطيء والبيت كيضبّب','مزيانة ل: لحظة عاطفية',
+ `<div class="cam" style="transform-origin:50% 45%;animation:slowpush 4s ease-in-out infinite alternate"><i class="rm" style="animation:melt 4s ease-in-out infinite alternate"></i>${P}</div>`],
+['over-the-shoulder-zoom','cam','u','زوم لزاوية مع مبيان زجاجي، من بعد الزاوية الأخرى مع مبيان ثاني','مزيانة ل: مقارنة رقمين',
+ `<div class="cam" style="animation:ots 4s cubic-bezier(.7,0,.2,1) infinite">${R+P}</div>`+[['win1','right:5%','#34D399','0,30 25,24 50,26 75,12 100,4'],['win2','left:5%','#F472B6','0,6 25,14 50,12 75,24 100,32']].map(([w,pos,c,pts])=>`<div class="glass" style="${pos};top:16%;width:42%;padding:2.4cqw;animation:${w} 4s infinite"><svg viewBox="0 0 100 36" style="position:static;width:100%;height:auto;stroke:${c};stroke-width:4"><polyline points="${pts}"/></svg></div>`).join('')],
+['camera-shake','cam','c','الكاميرا كترعد مع الضربة','مزيانة ل: لحظة صادمة أو خبر قوي',
+ `<div class="cam" style="animation:shake 4s infinite">${R+P}</div><b class="cap k" style="bottom:auto;top:16%;font:16cqw/1 var(--poster);color:#FFE14D;--k:pop;--d:.7s">BOOM</b>`],
+['jump-cut','cam','c','قطع مباشر مع تبديل حجم اللقطة بين الجمل','مزيانة ل: حيد الصمت والتنفس بلا ما يبان',
+ `<div class="cam" style="transform-origin:50% 45%;animation:jc 4s steps(1) infinite">${R+P}</div>`],
+['parallax','cam','c','الطبقات كيتحركو بسرعات مختلفة فيعطيو عمق','مزيانة ل: إحساس 3D فلقطة عادية',
+ `<i class="rm" style="inset:-6%;--px:3%;animation:par 4s ease-in-out infinite"></i><i class="p" style="--px:8%;animation:par 4s ease-in-out infinite;left:21%;transform:none"></i><i style="left:-8%;bottom:-6%;width:40%;aspect-ratio:1;border-radius:50%;background:#1E7A4E;filter:blur(2px);z-index:3;--px:20%;animation:par 4s ease-in-out infinite"></i>`],
+['ken-burns','cam','c','زوم وتحريك بطيء على صورة ثابتة','مزيانة ل: تحريك الصور والسكرينات',
+ `<i style="inset:0;background:linear-gradient(180deg,#FDB46B 0 38%,#F07A5A 38% 46%,#2F2A57 46%),#2F2A57;animation:kb 4s ease-in-out infinite alternate"><i style="left:12%;top:20%;width:20%;aspect-ratio:1;border-radius:50%;background:#FFE6A8"></i><i style="left:0;right:0;bottom:0;height:54%;background:repeating-linear-gradient(90deg,#1B1838 0 14%,#26214A 14% 22%)"></i></i>`],
+
+/* ---------- النص والعناوين ---------- */
+['kinetic-typography','text','c','الكلمات كيطلعو وحدة بوحدة مع الصوت','مزيانة ل: السبتايتلز ديال كل ريل',
+ R+P+`<p class="cap" style="margin:0">${[['موقع',0],['كيجيب',.3],['الكليان',.6]].map(([w,d],i)=>`<b class="k" style="--k:pop;--d:${d}s;${i==2?'color:#FFE14D':''}">${w}</b>`).join(' ')}</p>`],
+['typewriter','text','c','النص كيتكتب حرف بحرف بحال الماشينة','مزيانة ل: سؤال أو فكرة كتشد',
+ R+P+`<p class="cap" style="margin:0;bottom:auto;top:14%"><span style="overflow:hidden;white-space:nowrap;vertical-align:top;border-left:.8cqw solid #fff;font-size:8.6cqw;animation:typ 4s steps(12) infinite,caret .7s step-end infinite">شنو هو السر؟</span></p>`],
+['karaoke-captions','text','c','كل كلمة كتضوي فاش كتقولها','مزيانة ل: سبتايتلز كيشدو العين',
+ R+P+`<p class="cap" style="margin:0">${[['هاد',0],['الفكرة',1.3],['غادي تبدلك',2.6]].map(([w,d])=>`<b style="padding:0 1.4cqw;border-radius:1.4cqw;animation:hl 4s ${d}s infinite both">${w}</b>`).join(' ')}</p>`],
+['mask-reveal','text','c','النص كيبان من ورا قناع كيتمسح','مزيانة ل: العناوين والأسماء',
+ R+P+`<b class="k" style="left:50%;top:18%;--t0:translateX(-50%);--k:wipe;background:#EEEDFE;color:#3C3489;font:900 9cqw/1.3 var(--ar);padding:1cqw 4cqw;border-radius:2cqw;white-space:nowrap;z-index:3">Web Astra</b>`],
+['highlight-marker','text','c','ماركر أصفر كيدوز تحت الكلمات المهمة','مزيانة ل: تأكيد جملة',
+ R+P+`<p class="cap" style="margin:0;font-size:8.4cqw">موقع <mark style="color:inherit;background:linear-gradient(#E9B800,#E9B800) right bottom/0% 42% no-repeat;animation:mark 4s ease infinite">كيخدم عليك</mark></p>`],
+['number-counter','text','c','رقم كبير كيتحسب حتى كيوصل للنتيجة','مزيانة ل: الإحصائيات والنتائج',
+ R+P+`<b style="left:0;right:0;top:12%;text-align:center;z-index:3;color:#fff;font:900 22cqw/1 var(--mono);counter-reset:n var(--n);animation:cnt3 4s cubic-bezier(.2,.8,.2,1) infinite"><span class="pct" style="position:static"></span></b><b style="left:0;right:0;top:32%;text-align:center;z-index:3;color:#c9c6ff;font:700 5.6cqw var(--ar)">رضا الكليان</b>`],
+['text-scramble','text','c','الحروف كيتخلطو ومن بعد كيستقرو على الكلمة','مزيانة ل: التيك واسم البراند',
+ R+P+`<b class="scr" data-word="WEB ASTRA" style="left:0;right:0;top:18%;text-align:center;z-index:3;color:#38BDF8;font:700 9cqw var(--mono)">WEB ASTRA</b>`],
+['lower-third','text','c','شريط فيه الاسم والصفة فالتحت','مزيانة ل: تقديم الشخص اللي كيهضر',
+ R+P+`<b class="k" style="right:6%;bottom:19%;z-index:3;background:#5B3FD9;color:#fff;font:800 7cqw/1.3 var(--ar);padding:.6cqw 3cqw;--k:fromR;--d:.2s">حمزة</b><b class="k" style="right:6%;bottom:12.5%;z-index:3;background:#fff;color:#16182E;font:700 4.6cqw/1.5 var(--ar);padding:.4cqw 3cqw;--k:fromR;--d:.45s">مؤسس Web Astra</b>`],
+['headline-box','text','u','زوم مع عنوان نقي فسطرين','مزيانة ل: Hook فأول ثانية',
+ `<div class="cam" style="transform-origin:50% 50%;animation:punch 4s cubic-bezier(.7,0,.2,1) infinite">${R+P}</div><b class="wc k" style="left:8%;right:8%;top:10%;text-align:center;padding:2.4cqw;font:900 7cqw/1.3 var(--ar);--k:pop;--d:.75s">3 أخطاء<br>كتخسرك الكليان</b>`],
+['split-headline','text','u','كارطة عنوان كتهبط وكتدفعك للنص التحتاني','مزيانة ل: عنوان خبر أو موضوع',
+ `<div class="cam" style="animation:pushd 4s cubic-bezier(.7,0,.2,1) infinite">${R+P}</div><div style="left:0;right:0;top:0;height:46%;z-index:3;background:#fff;color:#16182E;display:grid;place-items:center;padding:4cqw;text-align:center;font:900 8cqw/1.25 var(--ar);direction:rtl;animation:hdown 4s cubic-bezier(.7,0,.2,1) infinite"><span style="position:static">الذكاء الاصطناعي<br>بدل كلشي</span></div>`],
+
+/* ---------- كروت وواجهات ---------- */
+['lineup','ui','u','كروت مرقمة كيتفرشو فوق راسك','مزيانة ل: لائحة ديال خطوات أو أسباب',
+ R+P+[[8,13,-10],[30,8,-4],[52,8,4],[74,13,10]].map(([l,t,r],i)=>`<b class="wc k" style="left:${l}%;top:${t}%;width:18%;aspect-ratio:3/4;display:grid;place-items:center;font:900 10cqw/1 var(--mono);color:#5B3FD9;--k:pop;--t0:rotate(${r}deg);--d:${i*.2}s">${i+1}</b>`).join('')],
+['the-bill','ui','u','التعليمات ديالك كتطبع بحال بون ديال الحانوت','مزيانة ل: خطوات أو عرض بالثمن',
+ R+P+`<div class="wc" style="right:6%;top:0;width:44%;padding:3cqw;border-radius:0 0 2px 2px;border-bottom:1.2cqw dashed #cfcce3;font:700 4.2cqw/1.4 var(--mono);animation:print 4s steps(12) infinite;direction:ltr"><b style="display:block;text-align:center">RECEIPT</b>${lines(4)}<b style="display:flex;justify-content:space-between"><span>TOTAL</span><span>99</span></b></div>`],
+['todo','ui','u','لائحة مهام حدا راسك كتشيك مع الكلام','مزيانة ل: شرح خطوات',
+ R+P+`<div class="wc k" style="right:4%;top:8%;width:50%;padding:2.6cqw;--k:pop">${[['تصميم',.7],['محتوى',1.2],['نشر',1.7]].map(([t,d])=>`<p style="margin:1cqw 0;display:flex;align-items:center;gap:2cqw"><span style="position:relative;width:5.4cqw;height:5.4cqw;border:.6cqw solid #5B3FD9;border-radius:1.2cqw;flex:none"><b class="k" style="position:absolute;inset:-1cqw;display:grid;place-items:center;color:#5B3FD9;font:900 5cqw/1 var(--ar);--k:pop;--d:${d}s">✓</b></span>${t}</p>`).join('')}</div>`],
+['checklist','ui','u','لائحة مهام تحت الذقن، كل خطوة كتخضار','مزيانة ل: شرح عملية خطوة بخطوة',
+ R+P+`<div class="wc k" style="left:10%;right:10%;bottom:6%;padding:2.6cqw;--k:rise">${[['جمع المعلومات',.6],['بناء الموقع',1.1],['الإطلاق',1.6]].map(([t,d])=>`<p style="margin:1cqw 0;display:flex;align-items:center;gap:2cqw"><span style="position:relative;width:5.4cqw;height:5.4cqw;border-radius:50%;background:#E2E0EF;flex:none"><b class="k" style="position:absolute;inset:0;border-radius:50%;background:#22C55E;color:#fff;display:grid;place-items:center;font:900 3.8cqw/1 var(--ar);--k:pop;--d:${d}s">✓</b></span>${t}</p>`).join('')}</div>`],
+['comment-box','ui','u','كومنتير ديال إنستغرام كيتكتب وكيتنشر','مزيانة ل: جواب على سؤال ديال متابع',
+ R+P+`<div class="wc k" style="left:5%;right:5%;bottom:8%;padding:2.4cqw;display:flex;align-items:center;gap:2cqw;font-size:4.8cqw;--k:rise"><i style="width:8cqw;height:8cqw;border-radius:50%;background:linear-gradient(45deg,#FBBF24,#E1306C,#8B5CF6);flex:none"></i><span style="flex:1;min-width:0"><span style="display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:top;animation:typ 4s steps(14) infinite">شحال الثمن ديال الموقع؟</span></span><b style="font:800 4.6cqw var(--ar);animation:postc 4s infinite">نشر</b></div>`],
+['tap','ui','u','بوطونة Follow كتولي Following','مزيانة ل: CTA فالآخر ديال الفيديو',
+ R+P+`<b style="left:50%;bottom:14%;width:56%;height:9%;z-index:3;font:800 6cqw var(--ar);text-align:center;animation:squash 4s infinite"><span style="position:absolute;inset:0;display:grid;place-items:center;border-radius:2.4cqw;background:#0095F6;color:#fff;animation:on1 4s infinite">Follow</span><span style="position:absolute;inset:0;display:grid;place-items:center;border-radius:2.4cqw;background:#EFEFEF;color:#111;animation:on2 4s infinite">Following</span></b><i style="left:50%;bottom:18.5%;width:14%;aspect-ratio:1;border-radius:50%;border:2px solid #fff;z-index:4;animation:ripple 4s infinite"></i>`],
+['messages','ui','u','إشعارات iMessage كيبانو وحدة ورا وحدة بضو خفيف','مزيانة ل: رسائل الكليان والطلبات',
+ R+P+[['واش باقي العرض؟',6,.2],['بغيت موقع لمحلي',20,.7],['شحال كياخد ديال الوقت؟',34,1.2]].map(([t,y,d])=>`<div class="glass k" style="left:5%;right:5%;top:${y}%;padding:2cqw;display:flex;gap:2cqw;align-items:center;background:#ffffffd9;color:#16182E;box-shadow:0 0 4cqw #ffffff70;direction:rtl;--k:pop;--d:${d}s"><i style="width:7cqw;height:7cqw;border-radius:1.8cqw;background:#34C759;flex:none"></i><span style="font:700 4.4cqw/1.3 var(--ar)">${t}</span></div>`).join('')],
+['apple-toggles','ui','u','سويتشات آيفون كيتشعلو تحت الذقن سطر بسطر','مزيانة ل: مميزات خدمة',
+ R+P+`<div class="glass k" style="left:8%;right:8%;bottom:5%;padding:1.6cqw 3cqw;background:#1C1C1Ee6;direction:rtl;--k:rise">${[['دومين مجاني',.4],['SEO',.9],['واتساب',1.4]].map(([t,d])=>`<p style="margin:1.4cqw 0;display:flex;align-items:center;justify-content:space-between;font:700 4.8cqw var(--ar)">${t}<span style="position:relative;width:13cqw;height:7.4cqw;border-radius:4cqw;flex:none;animation:tgon 4s ${d}s infinite both"><b style="position:absolute;right:.7cqw;top:.7cqw;width:6cqw;height:6cqw;border-radius:50%;background:#fff;animation:knob 4s ${d}s infinite both"></b></span></p>`).join('')}</div>`],
+['glass-widgets','ui','u','ويدجتس زجاجية ضبابية كيعومو حدا راسك','مزيانة ل: الأرقام، الأدوات والتيك',
+ R+P+[['left:4%;top:26%;width:30%',0,'<b style="display:flex;align-items:flex-end;gap:1cqw;height:12cqw">'+[40,70,55,95].map(h=>`<i style="width:3.4cqw;height:${h}%;background:#38BDF8;border-radius:1cqw"></i>`).join('')+'</b>'],['right:4%;top:20%;width:32%',.3,'<b style="display:block;font:900 8cqw/1 var(--mono)">4.9★</b>'],['left:30%;top:6%;width:40%',.6,'<b style="display:block;height:2.6cqw;border-radius:2cqw;background:#ffffff40"><i style="display:block;height:100%;width:72%;border-radius:2cqw;background:#34D399"></i></b>']].map(([pos,d,inner])=>`<div style="${pos};z-index:3;animation:bob 1.6s ease-in-out infinite alternate"><div class="glass k" style="position:relative;padding:2.4cqw;--k:pop;--d:${d}s">${inner}</div></div>`).join('')],
+['liquid-glass-graph','ui','u','كارطة زجاج فيها مبيان كيطلع ورقم كيتحسب','مزيانة ل: النتائج والأرقام',
+ R+P+`<div class="glass k" style="left:6%;top:12%;width:60%;padding:3cqw;--k:pop"><b style="display:block;font:900 9cqw/1 var(--mono);counter-reset:n var(--n);animation:cnt2 4s cubic-bezier(.2,.8,.2,1) infinite"><span class="plus"></span></b><svg viewBox="0 0 100 40" style="position:static;display:block;width:100%;height:auto;margin-top:2cqw;stroke:#38BDF8;stroke-width:4"><polyline class="dr" pathLength="1" style="--d:.3s" points="0,36 20,30 40,32 60,18 80,14 100,4"/></svg></div>`],
+['countdown-flip','ui','u','ساعة كتقلب 3، 2، 1 فوق راسك','مزيانة ل: العد التنازلي والتشويق',
+ R+P+`<div style="left:36%;top:12%;width:28%;aspect-ratio:3/4;border-radius:2.4cqw;background:#1B1B22;perspective:200px;z-index:3;box-shadow:0 2cqw 4cqw #0008">${[['3',0],['2',1.2],['1',2.4]].map(([n,d])=>`<b style="inset:0;display:grid;place-items:center;color:#fff;font:900 20cqw/1 var(--mono);animation:flip 4s ${d}s infinite both">${n}</b>`).join('')}<i style="left:0;right:0;top:50%;height:2px;background:#000"></i></div>`],
+['tier-list','ui','u','Tier list كتطيح وحاجة كتطير مباشرة لـS','مزيانة ل: مقارنة أدوات أو خدمات',
+ R+P+`<div class="wc k" style="left:5%;right:5%;top:4%;padding:1.4cqw;direction:ltr;--k:drop">${[['S','#FF7F7F'],['A','#FFBF7F'],['B','#FFDF7F'],['C','#BFFF7F']].map(([t,c],i)=>`<p style="margin:.6cqw 0;display:flex;gap:1.2cqw;height:8cqw"><b style="width:8cqw;background:${c};display:grid;place-items:center;font:900 5cqw var(--mono)">${t}</b>${i?[1,2].slice(0,3-i).map(()=>'<i style="width:8cqw;background:#cfcce3;border-radius:1cqw"></i>').join(''):''}</p>`).join('')}</div><i style="left:20%;top:5.6%;width:8cqw;height:8cqw;border-radius:2cqw;background:#D97757;z-index:4;animation:fly 4s cubic-bezier(.3,.7,.2,1) infinite"></i>`],
+['progress-bar','ui','c','شريط فالفوق كيعمر مع الفيديو','مزيانة ل: يخلي الناس يكملو حتى للآخر',
+ R+P+`<i style="left:5%;right:5%;top:4%;height:1.6cqw;border-radius:2cqw;background:#ffffff33;z-index:3"><i style="left:0;top:0;bottom:0;border-radius:2cqw;background:linear-gradient(90deg,#38BDF8,#8B78FF);animation:bar 4s linear infinite"></i></i>`],
+
+/* ---------- تكوين الكادر ---------- */
+['reel-frame','frame','u','الفيديو كيصغر ويولي كارطة ديال ريل','مزيانة ل: تهضر على ريل أو محتوى',
+ '<i style="inset:0;background:#0A0B16;z-index:0"></i>'+`<div class="cam" style="animation:shrink 4s cubic-bezier(.7,0,.2,1) infinite">${R+P}</div>`+['♥','✎','➤'].map((g,i)=>`<b class="k" style="right:6%;top:${40+i*10}%;z-index:3;color:#fff;font:700 7cqw/1 var(--ar);--k:fade;--d:${.9+i*.1}s">${g}</b>`).join('')+`<i class="k" style="left:6%;bottom:6%;width:50%;z-index:3;--k:fade;--d:1.2s"><i class="ln" style="position:static;background:#fff"></i><i class="ln" style="position:static;width:60%"></i></i>`],
+['place-in-grid','frame','u','كتصغر لوسط شبكة البروفايل، والريلز كيبانو داير بيك بالمشاهدات','مزيانة ل: تقديم الحساب ديالك',
+ '<i style="inset:0;background:#F4F3FA;z-index:0"></i>'+[[1,1],[34.5,1],[68,1],[1,34.5],[68,34.5],[1,68],[34.5,68],[68,68]].map(([l,t],i)=>`<i class="g${i%5+1} k" style="left:${l}%;top:${t}%;width:31%;height:31%;border-radius:1.4cqw;z-index:1;--k:pop;--d:${1.2+i*.08}s"><b style="left:6%;bottom:4%;color:#fff;font:700 4cqw var(--mono)">▶ ${[12,8,31,5,19,44,7,23][i]}K</b></i>`).join('')+`<div class="cam" style="animation:pig 4s cubic-bezier(.7,0,.2,1) infinite">${R+P}</div>`],
+['phone-fan','frame','u','الريلز كيتفرشو بحال الكارطة فاليد','مزيانة ل: عرض بزاف ديال الأعمال',
+ R+P+[-36,-18,0,18,36].map((a,i)=>`<i class="g${i+1}" style="left:50%;bottom:6%;width:22%;aspect-ratio:9/18;border:1cqw solid #111;border-radius:3cqw;z-index:3;transform-origin:50% 130%;--a:${a}deg;animation:fan 4s cubic-bezier(.5,0,.2,1) infinite"></i>`).join('')],
+['cover-star','frame','u','كتولي غلاف ديال مجلة','مزيانة ل: قصة نجاح أو تقديم شخص',
+ R+k('','fade',0,'inset:0;background:#F4D03F;z-index:0')+`<b class="k" style="left:0;right:0;top:3%;text-align:center;font:900 19cqw/1 'Playfair Display',Georgia,serif;color:#B3141B;z-index:1;--k:drop;--d:.2s">ASTRA</b>`+P+[['10 أسرار',62,.6],['ديال النجاح',70,.8]].map(([t,y,d])=>`<b class="k" style="left:5%;top:${y}%;z-index:3;color:#fff;font:900 6.6cqw/1.2 var(--ar);text-shadow:0 .5cqw 0 #000a;--k:fromL;--d:${d}s">${t}</b>`).join('')+`<i class="k" style="right:5%;bottom:4%;width:20%;height:7%;z-index:3;background:repeating-linear-gradient(90deg,#000 0 2px,#fff 2px 3px,#000 3px 4px,#fff 4px 6px);--k:fade;--d:1s"></i>`],
+['broll-split','frame','u','B-roll فالفوق مع ستيكر ديال الثمن، ونتا تحت','مزيانة ل: عرض منتوج بثمنو',
+ `<i style="left:0;right:0;top:0;height:50%;z-index:1;background:repeating-linear-gradient(90deg,#2A3F7A 0 9cqw,#203266 9cqw 20cqw) 0 100%/200% 50% repeat-x,linear-gradient(#FFB36B,#FF7A59) 0 0/100% 100%;animation:pan 4s linear infinite"></i><div style="left:0;right:0;bottom:0;height:50%;overflow:hidden;z-index:2">${R}<i class="p" style="height:96%"></i></div><b class="k" style="left:56%;top:36%;z-index:4;width:30%;aspect-ratio:1;border-radius:50%;background:#FFE14D;color:#16182E;display:grid;place-items:center;text-align:center;font:900 5.6cqw/1.1 var(--ar);--k:pop;--t0:rotate(-12deg);--d:.6s">99<br>درهم</b>`],
+['picture-in-picture','frame','c','وجهك كيصغر فإطار صغير فوق الشاشة','مزيانة ل: شرح موقع أو تطبيق',
+ `<div style="inset:0;background:#fff;z-index:0;overflow:hidden"><div style="left:0;right:0;top:0;height:140%;padding:4cqw;animation:scroll 4s ease-in-out infinite"><i style="left:4%;right:4%;top:2%;height:5%;border-radius:1cqw;background:#16182E"></i><i style="left:4%;right:4%;top:10%;height:22%;border-radius:2cqw;background:linear-gradient(135deg,#5B3FD9,#38BDF8)"></i>${[36,52,68,84].map(t=>`<i style="left:4%;width:42%;top:${t}%;height:13%;border-radius:2cqw;background:#ECE8FD"></i><i style="right:4%;width:42%;top:${t}%;height:13%;border-radius:2cqw;background:#ECE8FD"></i>`).join('')}</div></div><div style="z-index:3;overflow:hidden;border:1cqw solid #fff;box-shadow:0 2cqw 5cqw #0006;animation:pipm 4s cubic-bezier(.7,0,.2,1) infinite">${R+P}</div>`],
+['split-screen','frame','c','الكادر كيتقسم: المحتوى فالفوق ونتا تحت','مزيانة ل: ديمو مع الهضرة',
+ `<i style="left:0;right:0;top:0;height:30%;background:linear-gradient(135deg,#5B3FD9,#38BDF8);z-index:0"><b style="left:8%;top:30%;width:60%;height:12%;border-radius:2cqw;background:#ffffffb3"></b><b style="left:8%;top:52%;width:40%;height:12%;border-radius:2cqw;background:#ffffff70"></b></i><div class="cam" style="animation:splitc 4s cubic-bezier(.7,0,.2,1) infinite">${R+P}</div>`],
+['swipe','frame','u','سلايدر ديال قبل وبعد','مزيانة ل: نتيجة الخدمة ديالك',
+ `<div class="cam">${R+P}</div><div class="cam" style="filter:grayscale(1) brightness(.7);animation:reveal 4s ease-in-out infinite">${R+P}</div><i style="top:0;bottom:0;width:.8cqw;margin-left:-.4cqw;background:#fff;z-index:4;animation:hand 4s ease-in-out infinite"><b style="left:50%;top:46%;width:9cqw;height:9cqw;margin-left:-4.5cqw;border-radius:50%;background:#fff;box-shadow:0 1cqw 3cqw #0007"></b></i><b style="left:5%;top:4%;z-index:4;color:#fff;font:800 5cqw var(--ar);background:#0008;padding:0 2cqw;border-radius:1cqw">قبل</b><b style="right:5%;top:4%;z-index:4;color:#fff;font:800 5cqw var(--ar);background:#5B3FD9;padding:0 2cqw;border-radius:1cqw">بعد</b>`],
+
+/* ---------- الانتقالات ---------- */
+['whip-pan','trans','c','الكادر كيتجبد بسرعة لجنب مع بلور','مزيانة ل: الانتقال بين جوج لقطات',
+ `<div style="top:0;bottom:0;left:0;width:200%;z-index:2;animation:whip 4s cubic-bezier(.8,0,.2,1) infinite"><div class="sc" style="left:0">${R+P}</div><div class="sc" style="left:50%">${R2+P}</div></div>`],
+['zoom-transition','trans','c','زوم داخل اللقطة كيدخلك للقطة الجاية','مزيانة ل: انتقال قوي بين فكرتين',
+ `<div class="cam" style="transform-origin:50% 46%;animation:zA 4s cubic-bezier(.7,0,.9,.4) infinite">${R+P}</div><div class="cam" style="transform-origin:50% 46%;animation:zB 4s cubic-bezier(.1,.6,.3,1) infinite">${R2+P}</div>`],
+['glitch-transition','trans','c','تخربيق ديجيتال بين جوج لقطات','مزيانة ل: التيك والمفاجأة',
+ `<div class="cam" style="animation:gA 4s steps(1) infinite">${R+P}</div><div class="cam" style="animation:gB 4s steps(1) infinite">${R2+P}</div>`+[[18,'#00F0FF'],[44,'#FF2BD6'],[70,'#00F0FF']].map(([t,c])=>`<i style="left:-5%;right:-5%;top:${t}%;height:6%;background:${c};mix-blend-mode:screen;z-index:4;animation:gS 4s steps(1) infinite"></i>`).join('')],
+['circle-wipe','trans','c','اللقطة الجديدة كتبان من دائرة كتكبر','مزيانة ل: انتقال ناعم',
+ `<div class="cam">${R+P}</div><div class="cam" style="animation:circ 4s cubic-bezier(.7,0,.2,1) infinite">${R2+P}</div>`],
+['slide-push','trans','c','اللقطة الجديدة كتدفع القديمة لفوق','مزيانة ل: الانتقال بين الأفكار',
+ `<div style="left:0;right:0;top:0;height:200%;z-index:2;animation:push 4s cubic-bezier(.7,0,.2,1) infinite"><div style="left:0;right:0;top:0;height:50%;overflow:hidden">${R+P}</div><div style="left:0;right:0;top:50%;height:50%;overflow:hidden">${R2+P}</div></div>`],
+['light-leak','trans','c','تسرب ديال ضو دافي كيدوز فالكادر','مزيانة ل: جو دافي وانتقال ناعم',
+ R+P+`<i style="left:0;top:10%;width:120%;height:70%;z-index:3;border-radius:50%;background:radial-gradient(closest-side,#FFB86B,#FF4F7Bcc 45%,transparent);mix-blend-mode:screen;animation:leak 4s ease-in-out infinite"></i>`],
+['dot-reveal','trans','u','اللقطة كتبنى من نقط مضوية ومن بعد كتوضح','مزيانة ل: بداية فخمة',
+ `<div class="cam" style="animation:dotc 4s cubic-bezier(.7,0,.2,1) infinite">${R+P}</div><i style="inset:0;z-index:3;background:radial-gradient(circle,#A99BFF 1.1px,transparent 1.6px) 0 0/6px 6px;animation:doto 4s infinite"></i>`],
+['uninstall','trans','u','شريط Uninstall مخربق كيكسر الكادر','مزيانة ل: تخلص من عادة أو أداة قديمة',
+ `<div class="cam" style="animation:jit 4s steps(1) infinite">${R+P}</div>`+[[30,'#00F0FF'],[58,'#FF2BD6']].map(([t,c])=>`<i style="left:-5%;right:-5%;top:${t}%;height:5%;background:${c};mix-blend-mode:screen;z-index:4;animation:slices 4s steps(1) infinite"></i>`).join('')+`<div style="left:10%;right:10%;top:14%;z-index:4;background:#1C1C22;border:1px solid #3a3a46;border-radius:2cqw;padding:3cqw;color:#fff;font:700 4.6cqw var(--mono)">Uninstalling…<i style="position:relative;display:block;margin-top:2cqw;height:2.4cqw;border-radius:2cqw;background:#33333d"><i style="left:0;top:0;bottom:0;border-radius:2cqw;background:#EF4444;animation:fill 4s linear infinite"></i></i></div>`],
+
+/* ---------- اللون والإضاءة ---------- */
+['moody','look','u','تلوين سينمائي غامق','مزيانة ل: قصة ومزاج درامي',
+ `<div class="cam" style="animation:grade 4s ease infinite">${R+P}</div><i class="k" style="inset:0;z-index:3;background:radial-gradient(ellipse 70% 60% at 50% 50%,transparent 50%,#000c);--k:fade;--d:.8s"></i>`],
+['spotlight','look','u','الضو كيطفا وكتبقى غير نتا مضوي','مزيانة ل: لحظة جدية أو سر',
+ R+k('','fade',0,'inset:0;z-index:1;background:radial-gradient(ellipse 46% 36% at 50% 66%,transparent 40%,#000e 100%)')+P],
+['timeline','look','u','لوك فيلم أحمر غامق مع تايملاين ديال المونتاج','مزيانة ل: تهضر على المونتاج',
+ `<div class="cam" style="filter:sepia(.6) hue-rotate(-28deg) saturate(1.8) brightness(.62)">${R+P}</div><div style="left:4%;right:4%;bottom:5%;height:15%;z-index:3;background:#000a;border-radius:2cqw;padding:2cqw"><i style="left:3%;top:18%;width:34%;height:26%;border-radius:1cqw;background:#B91C1C"></i><i style="left:40%;top:18%;width:22%;height:26%;border-radius:1cqw;background:#7F1D1D"></i><i style="left:65%;top:18%;width:30%;height:26%;border-radius:1cqw;background:#B91C1C"></i><i style="left:10%;top:56%;width:50%;height:26%;border-radius:1cqw;background:#57534E"></i><i style="top:-14%;bottom:-14%;width:.8cqw;background:#fff;box-shadow:0 0 3cqw #FF5555,0 0 1.2cqw #fff;animation:play 4s linear infinite"></i></div>`],
+['pause-point','look','u','الصورة كتوقف ومعاها سهم مرسوم باليد','مزيانة ل: تشير لتفصيل مهم',
+ `<div class="cam" style="animation:freeze 4s infinite">${R+P}</div><i style="inset:0;background:#fff;z-index:4;animation:flash 4s infinite"></i><b class="k" style="left:6%;top:4%;z-index:4;color:#fff;font:900 8cqw/1 var(--ar);--k:fade;--d:1.2s">❚❚</b><svg viewBox="0 0 100 178" style="stroke:#FFE14D;stroke-width:2.6"><path class="dr" pathLength="1" style="--d:1.3s" d="M86 28 C 74 46, 88 62, 66 78"/><path class="dr" pathLength="1" style="--d:1.75s" d="M66 78 l1 -10 M66 78 l9 -4"/></svg>`],
+
+/* ---------- لمسات ---------- */
+['reject-stamp','acc','u','طابع أحمر كبير كيطيح بقوة','مزيانة ل: غلطة أو حاجة ممنوعة',
+ `<div class="cam" style="animation:hit 4s infinite">${R+P}</div><b style="left:50%;top:40%;z-index:4;border:1.4cqw solid #E02424;border-radius:2cqw;color:#E02424;padding:0 4cqw;font:900 15cqw/1.3 var(--ar);background:#ffffff1a;animation:stamp 4s cubic-bezier(.5,0,.4,1.4) infinite">مرفوض</b>`],
+['scribble','acc','u','رسومات بالماركر كيترسمو بوحدهم داير بيك','مزيانة ل: ستايل عفوي وخفيف',
+ R+P+`<svg viewBox="0 0 100 178" style="stroke:#fff;stroke-width:1.8"><path class="dr" pathLength="1" d="M52 68 C 72 66, 72 100, 50 100 C 28 100, 30 68, 54 70"/><path class="dr" pathLength="1" style="--d:.4s;stroke:#FFE14D" d="M16 36 l3 8 l9 0 l-7 5 l3 9 l-8 -6 l-8 6 l3 -9 l-7 -5 l9 0 z"/><path class="dr" pathLength="1" style="--d:.7s;stroke:#38BDF8" d="M70 34 q4 -6 8 0 t8 0 t8 0"/><path class="dr" pathLength="1" style="--d:1s" d="M88 128 C 84 112, 76 104, 66 98 M66 98 l9 0 M66 98 l3 8"/></svg>`],
+['icon-pop','acc','c','أيقونات 3D كيطلعو بقفزة حدا الكلام','مزيانة ل: توضيح كل فكرة بصورة',
+ R+P+[['♥','left:8%;top:30%','#F472B6,#BE185D',0],['★','right:8%;top:24%','#FDE68A,#F59E0B',.3],['✓','left:40%;top:8%','#6EE7B7,#059669',.6]].map(([g,pos,c,d])=>`<div style="${pos};width:20%;aspect-ratio:1;z-index:3;animation:bob 1.4s ease-in-out infinite alternate"><b class="k" style="position:relative;display:grid;place-items:center;width:100%;height:100%;border-radius:30%;background:radial-gradient(circle at 30% 25%,#ffffffb0,transparent 40%),linear-gradient(145deg,${c});box-shadow:inset -1.4cqw -1.6cqw 0 #0003,0 2cqw 3cqw #0006;color:#fff;font:900 9cqw/1 var(--ar);--k:pop;--d:${d}s">${g}</b></div>`).join('')],
+['motion-path','acc','c','خط متقطع كيترسم ونقطة كتمشي عليه من فكرة لفكرة','مزيانة ل: ربط فكرة بفكرة (فالستايل ديالكم)',
+ R+P+`<svg viewBox="0 0 100 178"><defs><mask id="mpm"><path class="dr" pathLength="1" d="M20 30 C 20 70, 80 40, 80 82" stroke="#fff" stroke-width="6"/></mask></defs><path d="M20 30 C 20 70, 80 40, 80 82" stroke="#fff" stroke-width="1.6" stroke-dasharray="3 3" mask="url(#mpm)"/><circle r="2.6" fill="#FFE14D" stroke="none"><animateMotion dur="4s" repeatCount="indefinite" path="M20 30 C 20 70, 80 40, 80 82" keyPoints="0;0;1;1" keyTimes="0;0.06;0.34;1" calcMode="linear"/></circle></svg><b class="k" style="left:10%;top:12%;width:20%;aspect-ratio:1;border-radius:30%;z-index:4;background:linear-gradient(145deg,#A78BFA,#6D28D9);--k:pop"></b><b class="k" style="left:70%;top:41%;width:20%;aspect-ratio:1;border-radius:30%;z-index:4;background:linear-gradient(145deg,#7DD3FC,#0284C7);--k:pop;--d:1.2s"></b>`],
+];
+
+/* counters shown through @property --n */
+const extraCss=document.createElement('style');
+extraCss.textContent='.st .cntx::after{content:counter(n) "K"}.st .pct::after{content:counter(n) "%"}.st .plus::after{content:"+" counter(n) "%"}';
+document.head.appendChild(extraCss);
+
+const list=document.getElementById('list'), bar=document.getElementById('bar'), q=document.getElementById('q');
+let cat='all', picked=[];
+try{picked=JSON.parse(localStorage.getItem('motion-picks')||'[]')}catch(e){picked=[]}
+const save=()=>{try{localStorage.setItem('motion-picks',JSON.stringify(picked))}catch(e){}};
+
+const chips=[['all','الكل',D.length],['fx','كتخدم فـ <bdi dir="ltr">/effects</bdi>',D.filter(d=>FX[d[0]]).length],...Object.entries(CATS).map(([k,v])=>[k,v,D.filter(d=>d[1]===k).length])];
+bar.insertAdjacentHTML('beforeend',chips.map(([k,v,n])=>`<button type="button" class="chip" data-cat="${k}" aria-pressed="${k==='all'}">${v}<small>${n}</small></button>`).join(''));
+
+function card(d){
+  const [id,c,src,desc,use,html]=d;
+  return `<article class="it run${picked.includes(id)?' on':''}" data-id="${id}" data-cat="${c}">
+    <div class="st" role="button" tabindex="0" aria-label="عاود المثال ديال ${id}">${html}</div>
+    <div class="row"><code class="nm">${id}</code><button type="button" class="pk" aria-pressed="${picked.includes(id)}" aria-label="اختار ${id}">${picked.includes(id)?'✓':'+'}</button></div>
+    <p class="ds">${desc}</p><p class="us">${use}</p>
+    ${FX[id]?`<p class="op">خيارات:<code>${FX[id]}</code></p>`:''}
+    <div class="tags"><span class="src${src==='u'?' u':''}">${src==='u'?'من اللائحة ديالك':'كلاسيكي'}</span>${FX[id]?'<span class="fx">كتخدم فـ <bdi dir="ltr">/effects</bdi></span>':''}</div>
+  </article>`;
+}
+function render(){
+  const term=q.value.trim().toLowerCase();
+  const match=d=>(cat==='all'||d[1]===cat||(cat==='fx'&&FX[d[0]]))&&(!term||(d[0]+' '+d[3]+' '+d[4]+' '+CATS[d[1]]+' '+(FX[d[0]]||'')).toLowerCase().includes(term));
+  let out='';
+  for(const [k,v] of Object.entries(CATS)){
+    const items=D.filter(d=>d[1]===k&&match(d));
+    if(items.length) out+=`<h2 class="sec">${v}<small>${items.length}</small></h2><div class="grid">${items.map(card).join('')}</div>`;
+  }
+  list.innerHTML=out||'<p class="empty">ما لقيت حتى حركة بهاد الكلمة. جرب سمية بالإنجليزية بحال zoom ولا text.</p>';
+  observe();
+}
+let io;
+function observe(){
+  if(io) io.disconnect();
+  if(!('IntersectionObserver' in window)) return;
+  io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('run',e.isIntersecting)),{rootMargin:'120px'});
+  list.querySelectorAll('.it').forEach(el=>io.observe(el));
+}
+function tray(){
+  const t=document.getElementById('tray');
+  t.hidden=!picked.length;
+  document.getElementById('picked').innerHTML=`<b>اختياراتك (${picked.length}): </b>`+picked.join(', ');
+}
+bar.addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b) return;
+  cat=b.dataset.cat;
+  bar.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',c===b));
+  render();
+});
+q.addEventListener('input',render);
+function replay(st){const id=st.closest('.it').dataset.id;st.innerHTML=D.find(d=>d[0]===id)[5]}
+list.addEventListener('click',e=>{
+  const pk=e.target.closest('.pk');
+  if(pk){
+    const it=pk.closest('.it'), id=it.dataset.id;
+    picked=picked.includes(id)?picked.filter(x=>x!==id):[...picked,id];
+    const on=picked.includes(id);
+    it.classList.toggle('on',on); pk.setAttribute('aria-pressed',on); pk.textContent=on?'✓':'+';
+    save(); tray(); return;
+  }
+  const st=e.target.closest('.st'); if(st) replay(st);
+});
+list.addEventListener('keydown',e=>{const st=e.target.closest('.st');if(st&&(e.key==='Enter'||e.key===' ')){e.preventDefault();replay(st)}});
+document.getElementById('copy').addEventListener('click',()=>{
+  const text='بغيت هاد الحركات: '+picked.join(', ');
+  const done=()=>{const c=document.getElementById('copied');c.hidden=false;setTimeout(()=>c.hidden=true,1600)};
+  const fallback=()=>{const p=document.getElementById('picked');const r=document.createRange();r.selectNodeContents(p);const s=getSelection();s.removeAllRanges();s.addRange(r)};
+  try{navigator.clipboard.writeText(text).then(done,fallback)}catch(e){fallback()}
+});
+document.getElementById('clear').addEventListener('click',()=>{picked=[];save();render();tray()});
+
+/* text-scramble demo */
+const G='ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&*';
+setInterval(()=>{
+  const t=(performance.now()%4000)/4000;
+  document.querySelectorAll('.it.run .scr').forEach(el=>{
+    const w=el.dataset.word, settled=Math.floor(Math.max(0,Math.min(1,(t-.1)/.5))*w.length);
+    el.textContent=t>.9?'':[...w].map((ch,i)=>i<settled||ch===' '?ch:G[Math.random()*G.length|0]).join('');
+  });
+},60);
+
+render(); tray();
+</script>

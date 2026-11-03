@@ -1,0 +1,694 @@
+{
+ "categories": {
+  "back": "ورا الراس",
+  "cam": "حركة الكاميرا",
+  "text": "النص والعناوين",
+  "ui": "كروت وواجهات",
+  "frame": "تكوين الكادر",
+  "trans": "الانتقالات",
+  "look": "اللون والإضاءة",
+  "acc": "لمسات"
+ },
+ "effects": [
+  {
+   "id": "noise",
+   "category": "back",
+   "category_ar": "ورا الراس",
+   "source": "effects-skill",
+   "description_ar": "الريلز ديالك كيطيحو وكيتكدسو ورا راسك",
+   "good_for_ar": "تبيين الخدمة ديالك وبورتفوليو",
+   "effects_options": "images, size",
+   "how": "`/effects` — options: images, size"
+  },
+  {
+   "id": "orbit",
+   "category": "back",
+   "category_ar": "ورا الراس",
+   "source": "effects-skill",
+   "description_ar": "الريلز كيدورو على راسك، ورا منك فالفوق وقدامك فالتحت",
+   "good_for_ar": "بورتفوليو بطريقة فخمة",
+   "effects_options": "images, count, speed, size",
+   "how": "`/effects` — options: images, count, speed, size"
+  },
+  {
+   "id": "backdrop-word",
+   "category": "back",
+   "category_ar": "ورا الراس",
+   "source": "effects-skill",
+   "description_ar": "كلمة كبيرة كتطيح ورا منك (كيسميوها حتى text behind subject)",
+   "good_for_ar": "الكلمة المفتاح ديال الفكرة",
+   "effects_options": "text, color, font (bold | serif)",
+   "how": "`/effects` — options: text, color, font (bold | serif)"
+  },
+  {
+   "id": "shortcut-rain",
+   "category": "back",
+   "category_ar": "ورا الراس",
+   "source": "effects-skill",
+   "description_ar": "أزرار الكلافيي كيطيحو بحال الشتا ورا منك",
+   "good_for_ar": "التيك، الاختصارات والأدوات",
+   "effects_options": "text (keys with |), count",
+   "how": "`/effects` — options: text (keys with |), count"
+  },
+  {
+   "id": "rabbit-hole",
+   "category": "back",
+   "category_ar": "ورا الراس",
+   "source": "effects-skill",
+   "description_ar": "البيت كيتحول نفق ورا منك",
+   "good_for_ar": "تدخل فموضوع عميق",
+   "effects_options": "ratio, speed, spin",
+   "how": "`/effects` — options: ratio, speed, spin"
+  },
+  {
+   "id": "headline-wall",
+   "category": "back",
+   "category_ar": "ورا الراس",
+   "source": "effects-skill",
+   "description_ar": "عناوين كيتكدسو ورا راسك، ومن بعد رقم كيبان قدامك",
+   "good_for_ar": "الدليل الاجتماعي والأخبار",
+   "effects_options": "text (headline::meta|…), total, label",
+   "how": "`/effects` — options: text (headline::meta|…), total, label"
+  },
+  {
+   "id": "carousel-spin",
+   "category": "back",
+   "category_ar": "ورا الراس",
+   "source": "effects-skill",
+   "description_ar": "الريلز كيدورو عليك بحال كاروسيل 3D",
+   "good_for_ar": "بورتفوليو",
+   "effects_options": "images, count, size, turns",
+   "how": "`/effects` — options: images, count, size, turns"
+  },
+  {
+   "id": "match-cut",
+   "category": "back",
+   "category_ar": "ورا الراس",
+   "source": "effects-skill",
+   "description_ar": "صفحات أخبار كيتبدلو على نفس الكلمة، والكلمة ثابتة فبلاصتها",
+   "good_for_ar": "ترند كيهضرو عليه الكل",
+   "effects_options": "text, color",
+   "how": "`/effects` — options: text, color"
+  },
+  {
+   "id": "led-sign",
+   "category": "back",
+   "category_ar": "ورا الراس",
+   "source": "effects-skill",
+   "description_ar": "الضو كيطفا ولافتة LED كتكتب راسها ورا منك",
+   "good_for_ar": "جو ليلي واسم البراند",
+   "effects_options": "text, color, push",
+   "how": "`/effects` — options: text, color, push"
+  },
+  {
+   "id": "profile-wall",
+   "category": "back",
+   "category_ar": "ورا الراس",
+   "source": "effects-skill",
+   "description_ar": "شبكة الريلز كتعمر الحيط والعداد كيطلع",
+   "good_for_ar": "النتائج وعدد الفولوورز",
+   "effects_options": "images, count, label",
+   "how": "`/effects` — options: images, count, label"
+  },
+  {
+   "id": "red-collage",
+   "category": "back",
+   "category_ar": "ورا الراس",
+   "source": "effects-skill",
+   "description_ar": "نتا بالأبيض والكحل، كلمة حمرا كبيرة ورا منك، و3 سطور كيضربو",
+   "good_for_ar": "Hook قوي بستايل بوستر",
+   "effects_options": "text, lines, tag",
+   "how": "`/effects` — options: text, lines, tag"
+  },
+  {
+   "id": "pastel-word",
+   "category": "back",
+   "category_ar": "ورا الراس",
+   "source": "effects-skill",
+   "description_ar": "بيت لون الخزامى، كلمة كبيرة ورا منك، وكارطة بروفايل كتتبّع",
+   "good_for_ar": "براند ناعم ورزين",
+   "effects_options": "text, name, handle",
+   "how": "`/effects` — options: text, name, handle"
+  },
+  {
+   "id": "check-pills",
+   "category": "back",
+   "category_ar": "ورا الراس",
+   "source": "effects-skill",
+   "description_ar": "ورق مربعات، الريلز ديالك ملصقين ورا منك، وأزرار زرقا كيتكليكاو",
+   "good_for_ar": "الخدمات والاختيارات",
+   "effects_options": "text (pills with |), images",
+   "how": "`/effects` — options: text (pills with |), images"
+  },
+  {
+   "id": "locked-on",
+   "category": "cam",
+   "category_ar": "حركة الكاميرا",
+   "source": "effects-skill",
+   "description_ar": "أقواس كيتسدّو على وجهك والكاميرا كتبعك",
+   "good_for_ar": "بداية الفيديو والـHook",
+   "effects_options": "zoom (1.35), text",
+   "how": "`/effects` — options: zoom (1.35), text"
+  },
+  {
+   "id": "lean-in",
+   "category": "cam",
+   "category_ar": "حركة الكاميرا",
+   "source": "effects-skill",
+   "description_ar": "زوم سريع على كلمة وحدة",
+   "good_for_ar": "تأكيد كلمة مهمة",
+   "effects_options": "zoom (1.45, max 2), speed",
+   "how": "`/effects` — options: zoom (1.45, max 2), speed"
+  },
+  {
+   "id": "slow-push",
+   "category": "cam",
+   "category_ar": "حركة الكاميرا",
+   "source": "effects-skill",
+   "description_ar": "زوم سينمائي بطيء والبيت كيضبّب",
+   "good_for_ar": "لحظة عاطفية",
+   "effects_options": "zoom (1.6), blur",
+   "how": "`/effects` — options: zoom (1.6), blur"
+  },
+  {
+   "id": "over-the-shoulder-zoom",
+   "category": "cam",
+   "category_ar": "حركة الكاميرا",
+   "source": "effects-skill",
+   "description_ar": "زوم لزاوية مع مبيان زجاجي، من بعد الزاوية الأخرى مع مبيان ثاني",
+   "good_for_ar": "مقارنة رقمين",
+   "effects_options": "text (2 labels), to (197K|672K), zoom",
+   "how": "`/effects` — options: text (2 labels), to (197K|672K), zoom"
+  },
+  {
+   "id": "camera-shake",
+   "category": "cam",
+   "category_ar": "حركة الكاميرا",
+   "source": "classic",
+   "description_ar": "الكاميرا كترعد مع الضربة",
+   "good_for_ar": "لحظة صادمة أو خبر قوي",
+   "effects_options": null,
+   "how": "classic — Remotion: on the hit frame, offset the whole layer with a decaying noise, e.g. x=sin(f*1.9)*A*exp(-f/6), A≈14px, 8-12 frames. Pair with a hit SFX."
+  },
+  {
+   "id": "jump-cut",
+   "category": "cam",
+   "category_ar": "حركة الكاميرا",
+   "source": "classic",
+   "description_ar": "قطع مباشر مع تبديل حجم اللقطة بين الجمل",
+   "good_for_ar": "حيد الصمت والتنفس بلا ما يبان",
+   "effects_options": null,
+   "how": "classic — Cut on the silences (pause-cut), and alternate scale 1.0 / 1.18 between takes with transform-origin on the face so cuts read as intentional."
+  },
+  {
+   "id": "parallax",
+   "category": "cam",
+   "category_ar": "حركة الكاميرا",
+   "source": "classic",
+   "description_ar": "الطبقات كيتحركو بسرعات مختلفة فيعطيو عمق",
+   "good_for_ar": "إحساس 3D فلقطة عادية",
+   "effects_options": null,
+   "how": "classic — Split into 2-3 layers (background, person via matte, foreground) and move them with the same eased curve at different amplitudes (3%, 8%, 20%)."
+  },
+  {
+   "id": "ken-burns",
+   "category": "cam",
+   "category_ar": "حركة الكاميرا",
+   "source": "classic",
+   "description_ar": "زوم وتحريك بطيء على صورة ثابتة",
+   "good_for_ar": "تحريك الصور والسكرينات",
+   "effects_options": null,
+   "how": "classic — Still image: interpolate scale 1.0→1.12 and translate a few % over the shot with easeInOut. Never on the face video itself."
+  },
+  {
+   "id": "kinetic-typography",
+   "category": "text",
+   "category_ar": "النص والعناوين",
+   "source": "classic",
+   "description_ar": "الكلمات كيطلعو وحدة بوحدة مع الصوت",
+   "good_for_ar": "السبتايتلز ديال كل ريل",
+   "effects_options": null,
+   "how": "classic — Word timings from Whisper (words.py / align_words.py); each word springs in (scale 0.6→1, opacity) on its own start frame; the key word gets the accent colour."
+  },
+  {
+   "id": "typewriter",
+   "category": "text",
+   "category_ar": "النص والعناوين",
+   "source": "classic",
+   "description_ar": "النص كيتكتب حرف بحرف بحال الماشينة",
+   "good_for_ar": "سؤال أو فكرة كتشد",
+   "effects_options": null,
+   "how": "classic — Reveal characters with Math.floor(progress*text.length) plus a blinking caret; for Arabic reveal whole words (letters change shape when cut)."
+  },
+  {
+   "id": "karaoke-captions",
+   "category": "text",
+   "category_ar": "النص والعناوين",
+   "source": "classic",
+   "description_ar": "كل كلمة كتضوي فاش كتقولها",
+   "good_for_ar": "سبتايتلز كيشدو العين",
+   "effects_options": null,
+   "how": "classic — Show the full line; the word being spoken gets a coloured pill behind it (interpolate background between its start and end frame)."
+  },
+  {
+   "id": "mask-reveal",
+   "category": "text",
+   "category_ar": "النص والعناوين",
+   "source": "classic",
+   "description_ar": "النص كيبان من ورا قناع كيتمسح",
+   "good_for_ar": "العناوين والأسماء",
+   "effects_options": null,
+   "how": "classic — Wrap the title in overflow:hidden and wipe it in with clip-path inset() from 100% to 0% over ~10 frames, ease out."
+  },
+  {
+   "id": "highlight-marker",
+   "category": "text",
+   "category_ar": "النص والعناوين",
+   "source": "classic",
+   "description_ar": "ماركر أصفر كيدوز تحت الكلمات المهمة",
+   "good_for_ar": "تأكيد جملة",
+   "effects_options": null,
+   "how": "classic — A yellow bar behind the words (background-size 0%→100% on the key phrase), 12-15 frames, starting when the phrase is spoken."
+  },
+  {
+   "id": "number-counter",
+   "category": "text",
+   "category_ar": "النص والعناوين",
+   "source": "classic",
+   "description_ar": "رقم كبير كيتحسب حتى كيوصل للنتيجة",
+   "good_for_ar": "الإحصائيات والنتائج",
+   "effects_options": null,
+   "how": "classic — interpolate(frame,[start,start+40],[0,target]) with an ease-out, Math.round, tabular-nums font; land the final value on a beat."
+  },
+  {
+   "id": "text-scramble",
+   "category": "text",
+   "category_ar": "النص والعناوين",
+   "source": "classic",
+   "description_ar": "الحروف كيتخلطو ومن بعد كيستقرو على الكلمة",
+   "good_for_ar": "التيك واسم البراند",
+   "effects_options": null,
+   "how": "classic — For N frames replace each letter with a random glyph (seeded by frame), then lock letters left to right onto the real word. Latin text only."
+  },
+  {
+   "id": "lower-third",
+   "category": "text",
+   "category_ar": "النص والعناوين",
+   "source": "classic",
+   "description_ar": "شريط فيه الاسم والصفة فالتحت",
+   "good_for_ar": "تقديم الشخص اللي كيهضر",
+   "effects_options": null,
+   "how": "classic — Two bars (name + role) slide in from the side with 4-frame stagger, hold 2-3 s, slide out. Keep inside the safe area above captions."
+  },
+  {
+   "id": "headline-box",
+   "category": "text",
+   "category_ar": "النص والعناوين",
+   "source": "effects-skill",
+   "description_ar": "زوم مع عنوان نقي فسطرين",
+   "good_for_ar": "Hook فأول ثانية",
+   "effects_options": "text (2 lines), zoom",
+   "how": "`/effects` — options: text (2 lines), zoom"
+  },
+  {
+   "id": "split-headline",
+   "category": "text",
+   "category_ar": "النص والعناوين",
+   "source": "effects-skill",
+   "description_ar": "كارطة عنوان كتهبط وكتدفعك للنص التحتاني",
+   "good_for_ar": "عنوان خبر أو موضوع",
+   "effects_options": "text, hl, pill",
+   "how": "`/effects` — options: text, hl, pill"
+  },
+  {
+   "id": "lineup",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "effects-skill",
+   "description_ar": "كروت مرقمة كيتفرشو فوق راسك",
+   "good_for_ar": "لائحة ديال خطوات أو أسباب",
+   "effects_options": "text (a|b|c)",
+   "how": "`/effects` — options: text (a|b|c)"
+  },
+  {
+   "id": "the-bill",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "effects-skill",
+   "description_ar": "التعليمات ديالك كتطبع بحال بون ديال الحانوت",
+   "good_for_ar": "خطوات أو عرض بالثمن",
+   "effects_options": "text (lines with |)",
+   "how": "`/effects` — options: text (lines with |)"
+  },
+  {
+   "id": "todo",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "effects-skill",
+   "description_ar": "لائحة مهام حدا راسك كتشيك مع الكلام",
+   "good_for_ar": "شرح خطوات",
+   "effects_options": "text (items with |), ticks, title",
+   "how": "`/effects` — options: text (items with |), ticks, title"
+  },
+  {
+   "id": "checklist",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "effects-skill",
+   "description_ar": "لائحة مهام تحت الذقن، كل خطوة كتخضار",
+   "good_for_ar": "شرح عملية خطوة بخطوة",
+   "effects_options": "text (step::meta|…), title",
+   "how": "`/effects` — options: text (step::meta|…), title"
+  },
+  {
+   "id": "comment-box",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "effects-skill",
+   "description_ar": "كومنتير ديال إنستغرام كيتكتب وكيتنشر",
+   "good_for_ar": "جواب على سؤال ديال متابع",
+   "effects_options": "text",
+   "how": "`/effects` — options: text"
+  },
+  {
+   "id": "tap",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "effects-skill",
+   "description_ar": "بوطونة Follow كتولي Following",
+   "good_for_ar": "CTA فالآخر ديال الفيديو",
+   "effects_options": "at, x, y, color",
+   "how": "`/effects` — options: at, x, y, color"
+  },
+  {
+   "id": "messages",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "effects-skill",
+   "description_ar": "إشعارات iMessage كيبانو وحدة ورا وحدة بضو خفيف",
+   "good_for_ar": "رسائل الكليان والطلبات",
+   "effects_options": "text (messages with |), title, y",
+   "how": "`/effects` — options: text (messages with |), title, y"
+  },
+  {
+   "id": "apple-toggles",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "effects-skill",
+   "description_ar": "سويتشات آيفون كيتشعلو تحت الذقن سطر بسطر",
+   "good_for_ar": "مميزات خدمة",
+   "effects_options": "text (rows with |), ticks, color, pos=below",
+   "how": "`/effects` — options: text (rows with |), ticks, color, pos=below"
+  },
+  {
+   "id": "glass-widgets",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "effects-skill",
+   "description_ar": "ويدجتس زجاجية ضبابية كيعومو حدا راسك",
+   "good_for_ar": "الأرقام، الأدوات والتيك",
+   "effects_options": "text, name, handle, look=simple",
+   "how": "`/effects` — options: text, name, handle, look=simple"
+  },
+  {
+   "id": "liquid-glass-graph",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "effects-skill",
+   "description_ar": "كارطة زجاج فيها مبيان كيطلع ورقم كيتحسب",
+   "good_for_ar": "النتائج والأرقام",
+   "effects_options": "text, from, to, color · look=bento",
+   "how": "`/effects` — options: text, from, to, color · look=bento"
+  },
+  {
+   "id": "countdown-flip",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "effects-skill",
+   "description_ar": "ساعة كتقلب 3، 2، 1 فوق راسك",
+   "good_for_ar": "العد التنازلي والتشويق",
+   "effects_options": "from",
+   "how": "`/effects` — options: from"
+  },
+  {
+   "id": "tier-list",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "effects-skill",
+   "description_ar": "Tier list كتطيح وحاجة كتطير مباشرة لـS",
+   "good_for_ar": "مقارنة أدوات أو خدمات",
+   "effects_options": "title, item, others",
+   "how": "`/effects` — options: title, item, others"
+  },
+  {
+   "id": "progress-bar",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "classic",
+   "description_ar": "شريط فالفوق كيعمر مع الفيديو",
+   "good_for_ar": "يخلي الناس يكملو حتى للآخر",
+   "effects_options": null,
+   "how": "classic — A thin bar at the top whose width = frame/durationInFrames. Brand colour, 6-8px."
+  },
+  {
+   "id": "reel-frame",
+   "category": "frame",
+   "category_ar": "تكوين الكادر",
+   "source": "effects-skill",
+   "description_ar": "الفيديو كيصغر ويولي كارطة ديال ريل",
+   "good_for_ar": "تهضر على ريل أو محتوى",
+   "effects_options": "text (handle)",
+   "how": "`/effects` — options: text (handle)"
+  },
+  {
+   "id": "place-in-grid",
+   "category": "frame",
+   "category_ar": "تكوين الكادر",
+   "source": "effects-skill",
+   "description_ar": "كتصغر لوسط شبكة البروفايل، والريلز كيبانو داير بيك بالمشاهدات",
+   "good_for_ar": "تقديم الحساب ديالك",
+   "effects_options": "images, views (9 counts)",
+   "how": "`/effects` — options: images, views (9 counts)"
+  },
+  {
+   "id": "phone-fan",
+   "category": "frame",
+   "category_ar": "تكوين الكادر",
+   "source": "effects-skill",
+   "description_ar": "الريلز كيتفرشو بحال الكارطة فاليد",
+   "good_for_ar": "عرض بزاف ديال الأعمال",
+   "effects_options": "images, text",
+   "how": "`/effects` — options: images, text"
+  },
+  {
+   "id": "cover-star",
+   "category": "frame",
+   "category_ar": "تكوين الكادر",
+   "source": "effects-skill",
+   "description_ar": "كتولي غلاف ديال مجلة",
+   "good_for_ar": "قصة نجاح أو تقديم شخص",
+   "effects_options": "text, lines, issue, color · look=editorial",
+   "how": "`/effects` — options: text, lines, issue, color · look=editorial"
+  },
+  {
+   "id": "broll-split",
+   "category": "frame",
+   "category_ar": "تكوين الكادر",
+   "source": "effects-skill",
+   "description_ar": "B-roll فالفوق مع ستيكر ديال الثمن، ونتا تحت",
+   "good_for_ar": "عرض منتوج بثمنو",
+   "effects_options": "images, text (tag)",
+   "how": "`/effects` — options: images, text (tag)"
+  },
+  {
+   "id": "picture-in-picture",
+   "category": "frame",
+   "category_ar": "تكوين الكادر",
+   "source": "classic",
+   "description_ar": "وجهك كيصغر فإطار صغير فوق الشاشة",
+   "good_for_ar": "شرح موقع أو تطبيق",
+   "effects_options": null,
+   "how": "classic — Face video scaled to ~32% in a rounded card with shadow over the full-screen content; spring the card in and out when the content starts/ends."
+  },
+  {
+   "id": "split-screen",
+   "category": "frame",
+   "category_ar": "تكوين الكادر",
+   "source": "classic",
+   "description_ar": "الكادر كيتقسم: المحتوى فالفوق ونتا تحت",
+   "good_for_ar": "ديمو مع الهضرة",
+   "effects_options": null,
+   "how": "classic — Content on the top half, face on the bottom half; the captions sit on the seam between the two halves (splitAt() drives both)."
+  },
+  {
+   "id": "swipe",
+   "category": "frame",
+   "category_ar": "تكوين الكادر",
+   "source": "effects-skill",
+   "description_ar": "سلايدر ديال قبل وبعد",
+   "good_for_ar": "نتيجة الخدمة ديالك",
+   "effects_options": "grade",
+   "how": "`/effects` — options: grade"
+  },
+  {
+   "id": "whip-pan",
+   "category": "trans",
+   "category_ar": "الانتقالات",
+   "source": "classic",
+   "description_ar": "الكادر كيتجبد بسرعة لجنب مع بلور",
+   "good_for_ar": "الانتقال بين جوج لقطات",
+   "effects_options": null,
+   "how": "classic — Translate the outgoing shot 0→-100% and the incoming 100%→0% over 6-8 frames with directional motion blur (blur filter or sample frames). Add a whoosh."
+  },
+  {
+   "id": "zoom-transition",
+   "category": "trans",
+   "category_ar": "الانتقالات",
+   "source": "classic",
+   "description_ar": "زوم داخل اللقطة كيدخلك للقطة الجاية",
+   "good_for_ar": "انتقال قوي بين فكرتين",
+   "effects_options": null,
+   "how": "classic — Scale the outgoing shot up to ~3x into a point while fading to the next shot, which starts at 0.6x and springs to 1."
+  },
+  {
+   "id": "glitch-transition",
+   "category": "trans",
+   "category_ar": "الانتقالات",
+   "source": "classic",
+   "description_ar": "تخربيق ديجيتال بين جوج لقطات",
+   "good_for_ar": "التيك والمفاجأة",
+   "effects_options": null,
+   "how": "classic — 3-6 frames of RGB split (offset copies with mix-blend screen), horizontal slice offsets and noise between the two shots; glitch SFX."
+  },
+  {
+   "id": "circle-wipe",
+   "category": "trans",
+   "category_ar": "الانتقالات",
+   "source": "classic",
+   "description_ar": "اللقطة الجديدة كتبان من دائرة كتكبر",
+   "good_for_ar": "انتقال ناعم",
+   "effects_options": null,
+   "how": "classic — Incoming shot masked with clip-path circle(r at x y), r from 0 to 150% over 12-15 frames, ease in-out."
+  },
+  {
+   "id": "slide-push",
+   "category": "trans",
+   "category_ar": "الانتقالات",
+   "source": "classic",
+   "description_ar": "اللقطة الجديدة كتدفع القديمة لفوق",
+   "good_for_ar": "الانتقال بين الأفكار",
+   "effects_options": null,
+   "how": "classic — Incoming shot pushes the old one up: both translateY together over 10 frames with an eased curve."
+  },
+  {
+   "id": "light-leak",
+   "category": "trans",
+   "category_ar": "الانتقالات",
+   "source": "classic",
+   "description_ar": "تسرب ديال ضو دافي كيدوز فالكادر",
+   "good_for_ar": "جو دافي وانتقال ناعم",
+   "effects_options": null,
+   "how": "classic — An orange/pink radial gradient layer with mix-blend screen sweeping across the frame over 15-20 frames, peak opacity ~0.7 on the cut."
+  },
+  {
+   "id": "dot-reveal",
+   "category": "trans",
+   "category_ar": "الانتقالات",
+   "source": "effects-skill",
+   "description_ar": "اللقطة كتبنى من نقط مضوية ومن بعد كتوضح",
+   "good_for_ar": "بداية فخمة",
+   "effects_options": "color, cell",
+   "how": "`/effects` — options: color, cell"
+  },
+  {
+   "id": "uninstall",
+   "category": "trans",
+   "category_ar": "الانتقالات",
+   "source": "effects-skill",
+   "description_ar": "شريط Uninstall مخربق كيكسر الكادر",
+   "good_for_ar": "تخلص من عادة أو أداة قديمة",
+   "effects_options": "text",
+   "how": "`/effects` — options: text"
+  },
+  {
+   "id": "moody",
+   "category": "look",
+   "category_ar": "اللون والإضاءة",
+   "source": "effects-skill",
+   "description_ar": "تلوين سينمائي غامق",
+   "good_for_ar": "قصة ومزاج درامي",
+   "effects_options": "grade (moody, bw, warm, cool, pop)",
+   "how": "`/effects` — options: grade (moody, bw, warm, cool, pop)"
+  },
+  {
+   "id": "spotlight",
+   "category": "look",
+   "category_ar": "اللون والإضاءة",
+   "source": "effects-skill",
+   "description_ar": "الضو كيطفا وكتبقى غير نتا مضوي",
+   "good_for_ar": "لحظة جدية أو سر",
+   "effects_options": "text, color, push · look=sparkle (glitter-spotlight)",
+   "how": "`/effects` — options: text, color, push · look=sparkle (glitter-spotlight)"
+  },
+  {
+   "id": "timeline",
+   "category": "look",
+   "category_ar": "اللون والإضاءة",
+   "source": "effects-skill",
+   "description_ar": "لوك فيلم أحمر غامق مع تايملاين ديال المونتاج",
+   "good_for_ar": "تهضر على المونتاج",
+   "effects_options": "text, sub, tc",
+   "how": "`/effects` — options: text, sub, tc"
+  },
+  {
+   "id": "pause-point",
+   "category": "look",
+   "category_ar": "اللون والإضاءة",
+   "source": "effects-skill",
+   "description_ar": "الصورة كتوقف ومعاها سهم مرسوم باليد",
+   "good_for_ar": "تشير لتفصيل مهم",
+   "effects_options": "text, color, label_x",
+   "how": "`/effects` — options: text, color, label_x"
+  },
+  {
+   "id": "reject-stamp",
+   "category": "acc",
+   "category_ar": "لمسات",
+   "source": "effects-skill",
+   "description_ar": "طابع أحمر كبير كيطيح بقوة",
+   "good_for_ar": "غلطة أو حاجة ممنوعة",
+   "effects_options": "text, color, angle, y",
+   "how": "`/effects` — options: text, color, angle, y"
+  },
+  {
+   "id": "scribble",
+   "category": "acc",
+   "category_ar": "لمسات",
+   "source": "effects-skill",
+   "description_ar": "رسومات بالماركر كيترسمو بوحدهم داير بيك",
+   "good_for_ar": "ستايل عفوي وخفيف",
+   "effects_options": "text, color",
+   "how": "`/effects` — options: text, color"
+  },
+  {
+   "id": "icon-pop",
+   "category": "acc",
+   "category_ar": "لمسات",
+   "source": "classic",
+   "description_ar": "أيقونات 3D كيطلعو بقفزة حدا الكلام",
+   "good_for_ar": "توضيح كل فكرة بصورة",
+   "effects_options": null,
+   "how": "classic — Colored 3D icon (iconify-icons skill) springs in next to the spoken word: scale 0→1.1→1, small rotation, pop SFX; out with scale down."
+  },
+  {
+   "id": "motion-path",
+   "category": "acc",
+   "category_ar": "لمسات",
+   "source": "classic",
+   "description_ar": "خط متقطع كيترسم ونقطة كتمشي عليه من فكرة لفكرة",
+   "good_for_ar": "ربط فكرة بفكرة (فالستايل ديالكم)",
+   "effects_options": null,
+   "how": "classic — Draw a dashed SVG path with strokeDashoffset, then move a dot/arrow along it with getPointAtLength; links one idea card to the next (Web Astra house style)."
+  }
+ ]
+}
