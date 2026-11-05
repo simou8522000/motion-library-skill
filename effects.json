@@ -7,7 +7,9 @@
   "frame": "تكوين الكادر",
   "trans": "الانتقالات",
   "look": "اللون والإضاءة",
-  "acc": "لمسات"
+  "acc": "لمسات",
+  "data": "أرقام ومبيانات",
+  "explain": "شرح الأفكار"
  },
  "effects": [
   {
@@ -689,6 +691,556 @@
    "good_for_ar": "ربط فكرة بفكرة (فالستايل ديالكم)",
    "effects_options": null,
    "how": "classic — Draw a dashed SVG path with strokeDashoffset, then move a dot/arrow along it with getPointAtLength; links one idea card to the next (Web Astra house style)."
+  },
+  {
+   "id": "stopwatch-slam",
+   "category": "acc",
+   "category_ar": "لمسات",
+   "source": "showreel",
+   "description_ar": "ساعة توقيف كتطيح كبيرة وكتضرب مع رعشة، العقرب كيدور وكيحمار",
+   "good_for_ar": "الوقت والتكلفة اللي كتضيع",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component Stopwatch (Hook); reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "orbit-birth",
+   "category": "acc",
+   "category_ar": "لمسات",
+   "source": "showreel",
+   "description_ar": "أيقونات كيتولدو من ورا أيقونة كبيرة، كيطيرو فقوس وكيدورو عليها",
+   "good_for_ar": "لائحة حوايج كتديرهم أداة وحدة",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component Hook ORBIT + EMERGE_GAP; reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "step-hud",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "showreel",
+   "description_ar": "شريط أيقونات صغير فالفوق: الخطوة الحالية كبيرة واللي سالاو عليهم ✓",
+   "good_for_ar": "ريل فيه لائحة مرقمة",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component StepHud (Showreel.tsx); reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "prompt-score",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "showreel",
+   "description_ar": "فكرة كتتكتب، كارطة AI كتجاوب، 3 سطور بأشرطة كتعمر والأحسن كيتختم",
+   "good_for_ar": "نتائج AI، مقارنات وتقييم",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component Script + ScoreRow; reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "rec-tag",
+   "category": "acc",
+   "category_ar": "لمسات",
+   "source": "showreel",
+   "description_ar": "REC أحمر كيرمش على الفيديو حدا الراس",
+   "good_for_ar": "قبل التصوير، live، حالة على الفيديو",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component RecTag; reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "letters-to-mic",
+   "category": "acc",
+   "category_ar": "لمسات",
+   "source": "showreel",
+   "description_ar": "الحروف كيطيرو فقوس للميكرو وكتولي موجة صوت",
+   "good_for_ar": "نص كيتحول لصوت، أي تحويل",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component Voice + Wave; reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "timeline-panel",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "showreel",
+   "description_ar": "تايملاين ديال المونتاج فوق الفيديو: track لكل كلمة والـ playhead كيمشي",
+   "good_for_ar": "شرح المونتاج والـ workflow",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component Edit + TRACKS; reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "brand-flip",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "showreel",
+   "description_ar": "3 سلايدات بستايلات مختلفة كيتقلبو وحدة وحدة للهوية ديال البراند",
+   "good_for_ar": "الهوية، قبل وبعد التصميم",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component Carousel + Slide/OFF; reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "agent-hub",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "showreel",
+   "description_ar": "روبوت فالوسط وخطوط متقطعة كتمشي فيها نقط لتليفون WhatsApp وللموقع",
+   "good_for_ar": "الأتمتة والربط بين الأدوات",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component Agent + Bubble/Typing; reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "post-cta",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "showreel",
+   "description_ar": "بوست إنستغرام: الحفظ كيتعمر، الشير كيطير لصاحب، والتعليق كيتكتب",
+   "good_for_ar": "CTA ديال save/share/comment",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component Cta; reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "face-travel",
+   "category": "frame",
+   "category_ar": "تكوين الكادر",
+   "source": "showreel",
+   "description_ar": "الوجه كيتنقل بين الشاشة كاملة، كارطة تحت وإطار صغير، بتلفة خفيفة",
+   "good_for_ar": "ريل كامل بالموشن حول الوجه",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component Face + KEYS (FULL/CARD/PIP); reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "gradient-swipe",
+   "category": "trans",
+   "category_ar": "الانتقالات",
+   "source": "showreel",
+   "description_ar": "شريط gradient مايل كيقطع الشاشة فكل تبدال ديال فكرة",
+   "good_for_ar": "الانتقال بين المشاهد فالستايل ديالكم",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component Swipe (Showreel.tsx); reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "live-chat",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "showreel",
+   "description_ar": "محادثة WhatsApp: الرسالة كتتكتب حرف بحرف وكتتصيفط، والرد كيبان كلمة بكلمة",
+   "good_for_ar": "ديمو ديال بوت ولا محادثة حقيقية",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component Chat (reel-26 scenes26.tsx); reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "summary-to-ticket",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "showreel",
+   "description_ar": "بطاقة ملخص: كل سطر كيتعلم ✓، ومن بعد كتتحول لتذكرة خضرا «تم الحجز»",
+   "good_for_ar": "تأكيد حجز ولا طلب",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component Booking (reel-26 scenes26.tsx); reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "flag-tiles",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "showreel",
+   "description_ar": "بطاقات بالأعلام كيتشعلو وحدة وحدة مع اسم كل بلد",
+   "good_for_ar": "اللغات، اللهجات، البلدان",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component Dialects (reel-26 scenes26.tsx); reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "clock-roll",
+   "category": "text",
+   "category_ar": "النص والعناوين",
+   "source": "showreel",
+   "description_ar": "ساعة كبيرة كتدور الأرقام ديالها حتى كتوقف على الوقت (23:39)",
+   "good_for_ar": "وقت محدد، الليل، الاستعجال",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component NightOver (reel-26 scenes26.tsx); reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "share-send",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "showreel",
+   "description_ar": "نافذة «رسل لـ…»: كتعلم على صاحبك والبوطونة كتولي «تم الإرسال»",
+   "good_for_ar": "CTA ديال الشير",
+   "effects_options": null,
+   "how": "showreel — `webastra-showreel` component Send (reel-26 scenes26.tsx); reuse it in Remotion, each beat keyed to a spoken word with say()."
+  },
+  {
+   "id": "one-shape",
+   "category": "trans",
+   "category_ar": "الانتقالات",
+   "source": "launch",
+   "description_ar": "شكل واحد كيتحول من حالة لحالة (زر → دائرة → كارطة) بلا حتى قطع",
+   "good_for_ar": "فيديو إطلاق منتوج ولا تطبيق",
+   "effects_options": null,
+   "how": "launch — `product-launch-motion` technique: one element whose size, radius and colour ride springs between states; content swaps inside it (closed-form springs, pure seek(t))."
+  },
+  {
+   "id": "blur-swap",
+   "category": "trans",
+   "category_ar": "الانتقالات",
+   "source": "launch",
+   "description_ar": "المحتوى داخل الكارطة كيتبدل بضبابة قصيرة، والكارطة باقية فبلاصتها",
+   "good_for_ar": "تبدال النص ولا الأرقام بلا قطع",
+   "effects_options": null,
+   "how": "launch — `product-launch-motion` technique: vis(): enter on a spring, exit short and early with blur 10px (closed-form springs, pure seek(t))."
+  },
+  {
+   "id": "brand-cursor",
+   "category": "acc",
+   "category_ar": "لمسات",
+   "source": "launch",
+   "description_ar": "cursor بلون البراند مع اسمو (Web Astra AI) كيتحرك، كيميل مع السرعة وكيضغط",
+   "good_for_ar": "الـ AI كيخدم بوحدو قدام الناس",
+   "effects_options": null,
+   "how": "launch — `product-launch-motion` technique: gradient arrow + name pill, lean = -vx·0.0045, pill trails the velocity (closed-form springs, pure seek(t))."
+  },
+  {
+   "id": "click-ripple",
+   "category": "acc",
+   "category_ar": "لمسات",
+   "source": "launch",
+   "description_ar": "ضغطة حقيقية: الزر كيتزير شوية وموجة كتخرج من تحت الـ cursor",
+   "good_for_ar": "كل كليك فالديمو",
+   "effects_options": null,
+   "how": "launch — `product-launch-motion` technique: press scale 1−0.16·exp(−((t−tc)/0.045)²) + 0.4 s ring (closed-form springs, pure seek(t))."
+  },
+  {
+   "id": "slide-to-confirm",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "launch",
+   "description_ar": "زر كيتسحب للتأكيد: القيمة كتبع اليد والزر كيتمدد شوية ملي كيتجر",
+   "good_for_ar": "تأكيد، دفع، «نعم أكيد»",
+   "effects_options": null,
+   "how": "launch — `product-launch-motion` technique: while held, knob x = cursor x; it stretches with speed; springs back on release (closed-form springs, pure seek(t))."
+  },
+  {
+   "id": "stretch-toggle",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "launch",
+   "description_ar": "سويتش: الكرة ديالو كتتمدد ملي كتمشي (الجهة القدامية كتسبق)",
+   "good_for_ar": "تشعيل ميزة، تذكير، Autopilot",
+   "effects_options": null,
+   "how": "launch — `product-launch-motion` technique: edge-split: leading edge on a stiff spring, trailing on a soft one (width = R − L) (closed-form springs, pure seek(t))."
+  },
+  {
+   "id": "liquid-tabs",
+   "category": "ui",
+   "category_ar": "كروت وواجهات",
+   "source": "launch",
+   "description_ar": "مؤشر التابات كيتمدد بحال السائل من تاب لتاب",
+   "good_for_ar": "مراحل، أقسام، قبل/بعد",
+   "effects_options": null,
+   "how": "launch — `product-launch-motion` technique: same edge-split as the toggle, across tab positions (closed-form springs, pure seek(t))."
+  },
+  {
+   "id": "odometer",
+   "category": "text",
+   "category_ar": "النص والعناوين",
+   "source": "launch",
+   "description_ar": "أرقام كتدور بحال عداد الطوموبيل، كل رقم كيتحرك غير ملي كيدوز اللي تحتو",
+   "good_for_ar": "أرقام حقيقية كبيرة (زبناء، رسائل)",
+   "effects_options": null,
+   "how": "launch — `product-launch-motion` technique: per-digit strips 0–9, a digit moves only while the one below carries (closed-form springs, pure seek(t))."
+  },
+  {
+   "id": "push-to-ui",
+   "category": "cam",
+   "category_ar": "حركة الكاميرا",
+   "source": "launch",
+   "description_ar": "الكاميرا كتقرب على عنصر حتى يعمر الكادر، ومن بعد كترجع للصورة كاملة",
+   "good_for_ar": "تبيين تفصيلة فواجهة",
+   "effects_options": null,
+   "how": "launch — `product-launch-motion` technique: camera Tracks (x, y, log-zoom) push so the element fills the frame, then pull back (closed-form springs, pure seek(t))."
+  },
+  {
+   "id": "stream-reply",
+   "category": "text",
+   "category_ar": "النص والعناوين",
+   "source": "launch",
+   "description_ar": "جواب الـ AI كيبان كلمة بكلمة مع ضبابة خفيفة، بحال اللي كيكتب دابا",
+   "good_for_ar": "ردود البوت والذكاء الاصطناعي",
+   "effects_options": null,
+   "how": "launch — `product-launch-motion` technique: reply words revealed one by one with a short blur; the agent cursor follows the last word (closed-form springs, pure seek(t))."
+  },
+  {
+   "id": "logo-slam",
+   "category": "acc",
+   "category_ar": "لمسات",
+   "source": "launch",
+   "description_ar": "اللوجو كيتجمع قطعة قطعة وكيضرب على الإيقاع مع موجة",
+   "good_for_ar": "النهاية ولا بداية البراند",
+   "effects_options": null,
+   "how": "launch — `product-launch-motion` technique: logo parts fly in on springs and land on a beat, ring on the hit (closed-form springs, pure seek(t))."
+  },
+  {
+   "id": "bar-chart-grow",
+   "category": "data",
+   "category_ar": "أرقام ومبيانات",
+   "source": "hyperframes",
+   "description_ar": "3 حتى 7 ديال الأعمدة كيطلعو من التحت مع الأرقام",
+   "good_for_ar": "مقارنة النتائج",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/bar-chart-grow` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "ring-counter",
+   "category": "data",
+   "category_ar": "أرقام ومبيانات",
+   "source": "hyperframes",
+   "description_ar": "رقم كبير كيتحسب من 0 مع دائرة ديال التقدم داير بيه",
+   "good_for_ar": "إنجاز، KPI، مجموع",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/number-counter` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "line-chart-draw",
+   "category": "data",
+   "category_ar": "أرقام ومبيانات",
+   "source": "hyperframes",
+   "description_ar": "خط كيترسم من اليسار لليمين والنقط كيطلعو وحدة وحدة",
+   "good_for_ar": "التطور مع الوقت",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/line-chart-draw` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "metric-pulse",
+   "category": "data",
+   "category_ar": "أرقام ومبيانات",
+   "source": "hyperframes",
+   "description_ar": "رقم واحد كبير كينبض مع ضو، وتحتو شنو كيعني",
+   "good_for_ar": "نتيجة وحدة قوية",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/metric-pulse` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "big-number-card",
+   "category": "data",
+   "category_ar": "أرقام ومبيانات",
+   "source": "hyperframes",
+   "description_ar": "كارطة فيها رقم ضخم وجملة وحدة كتشرحو",
+   "good_for_ar": "الخلاصة: الوقت، التكلفة، الربح",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/big-number-card` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "before-after-stat",
+   "category": "data",
+   "category_ar": "أرقام ومبيانات",
+   "source": "hyperframes",
+   "description_ar": "رقمين: قبل وبعد، والفرق كيبان واضح",
+   "good_for_ar": "تحسين بأداة ولا طريقة جديدة",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/before-after-stat` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "horizontal-bar-compare",
+   "category": "data",
+   "category_ar": "أرقام ومبيانات",
+   "source": "hyperframes",
+   "description_ar": "جوج أشرطة أفقية كيتمدو: الطريقة القديمة ضد الجديدة",
+   "good_for_ar": "مقارنة جوج أدوات",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/horizontal-bar-compare` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "top-rank-list",
+   "category": "data",
+   "category_ar": "أرقام ومبيانات",
+   "source": "hyperframes",
+   "description_ar": "ترتيب Top 3: كل سطر كيطلع بوحدو مع رقمو",
+   "good_for_ar": "أحسن 3 أدوات ولا أسباب",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/top-rank-list` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "turning-point-line",
+   "category": "data",
+   "category_ar": "أرقام ومبيانات",
+   "source": "hyperframes",
+   "description_ar": "خط الاتجاه كيترسم ونقطة التحول كتضوي",
+   "good_for_ar": "اللحظة اللي تبدل فيها كلشي",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/turning-point-line` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "compact-number-callout",
+   "category": "data",
+   "category_ar": "أرقام ومبيانات",
+   "source": "hyperframes",
+   "description_ar": "رقم كبير وجملة وحدة عامرين الشاشة كاملة",
+   "good_for_ar": "لحظة الرقم الصادم",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/compact-number-callout` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "donut-progress",
+   "category": "data",
+   "category_ar": "أرقام ومبيانات",
+   "source": "hyperframes",
+   "description_ar": "دائرة كتعمر حتى النسبة والرقم فالوسط كيتحسب",
+   "good_for_ar": "نسبة، احتمال، حصة",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/donut-progress` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "stat-duel",
+   "category": "data",
+   "category_ar": "أرقام ومبيانات",
+   "source": "hyperframes",
+   "description_ar": "جوج أرقام وجه لوجه فالتحت ديال الفيديو، شفافين فوق التصوير",
+   "good_for_ar": "مقارنة فوق الهضرة",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/stat-duel` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "number-impact",
+   "category": "data",
+   "category_ar": "أرقام ومبيانات",
+   "source": "hyperframes",
+   "description_ar": "كلمة ضخمة ونسبة مع مسطرة كتضرب بقوة فوق الفيديو",
+   "good_for_ar": "رقم كيصدم فوسط الهضرة",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/number-impact` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "source-citation-card",
+   "category": "explain",
+   "category_ar": "شرح الأفكار",
+   "source": "hyperframes",
+   "description_ar": "كارطة صغيرة لتحت فيها المصدر، التاريخ والرقم",
+   "good_for_ar": "تزيد المصداقية لأي رقم",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/source-citation-card` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "status-split",
+   "category": "explain",
+   "category_ar": "شرح الأفكار",
+   "source": "hyperframes",
+   "description_ar": "الشاشة كتقسم: العادي ضد غير العادي، ولا قبل ضد دابا",
+   "good_for_ar": "لحظة التحول فالقصة",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/status-split` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "concept-spotlight",
+   "category": "explain",
+   "category_ar": "شرح الأفكار",
+   "source": "hyperframes",
+   "description_ar": "كارطة زجاجية فيها سمية المفهوم وجملة كتشرحو",
+   "good_for_ar": "تشرح كلمة تقنية (AI Agent، API…)",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/concept-spotlight` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "three-step-flow",
+   "category": "explain",
+   "category_ar": "شرح الأفكار",
+   "source": "hyperframes",
+   "description_ar": "3 خطوات على خط تقدم، كل وحدة كتضوي فدورها",
+   "good_for_ar": "طريقة من 3 خطوات",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/three-step-flow` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "myth-fact-swap",
+   "category": "explain",
+   "category_ar": "شرح الأفكار",
+   "source": "hyperframes",
+   "description_ar": "الخرافة كتتشطب بالأحمر وكتتبدل بالحقيقة",
+   "good_for_ar": "«الكل كيقول… ولكن الحقيقة»",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/myth-fact-swap` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "key-point-marker",
+   "category": "explain",
+   "category_ar": "شرح الأفكار",
+   "source": "hyperframes",
+   "description_ar": "جملة مهمة لتحت مع خط صغير كيخرجها",
+   "good_for_ar": "الخلاصة ولا جملة كتنحفظ",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/key-point-marker` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "checklist-pop",
+   "category": "explain",
+   "category_ar": "شرح الأفكار",
+   "source": "hyperframes",
+   "description_ar": "3 نقط كيدخلو وحدة وحدة وكيتعلمو ✓",
+   "good_for_ar": "ملخص الخطوات ولا الأشياء اللي خاصك",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/checklist-pop` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "timeline-scan",
+   "category": "explain",
+   "category_ar": "شرح الأفكار",
+   "source": "hyperframes",
+   "description_ar": "3 محطات فالزمن كيضويو وحدة وحدة على طريق",
+   "good_for_ar": "مراحل، تطور، تاريخ",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/timeline-scan` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "cause-chain",
+   "category": "explain",
+   "category_ar": "شرح الأفكار",
+   "source": "hyperframes",
+   "description_ar": "سبب ← آلية ← نتيجة، 3 كروت مربوطين بالسهام",
+   "good_for_ar": "علاش كيوقع هادشي",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/cause-chain` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "mode-choice-compare",
+   "category": "explain",
+   "category_ar": "شرح الأفكار",
+   "source": "hyperframes",
+   "description_ar": "جوج خيارات قد قد مع VS فالوسط",
+   "good_for_ar": "يدوي ولا أوتوماتيك، أداة ولا أداة",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/mode-choice-compare` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "iteration-loop",
+   "category": "explain",
+   "category_ar": "شرح الأفكار",
+   "source": "hyperframes",
+   "description_ar": "4 خطوات فدورة: المشكل ← الإصلاح ← المحاولة ← النتيجة",
+   "good_for_ar": "التحسين المستمر، المراجعة",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/iteration-loop` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "keyword-blast",
+   "category": "explain",
+   "category_ar": "شرح الأفكار",
+   "source": "hyperframes",
+   "description_ar": "كلمة ضخمة كتنفجر من الوسط مع موجة وضو",
+   "good_for_ar": "الهوك، التحول فالرأي",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/keyword-blast` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "chapter-title",
+   "category": "explain",
+   "category_ar": "شرح الأفكار",
+   "source": "hyperframes",
+   "description_ar": "رقم الفصل ضخم مع العنوان، صفحة كاملة",
+   "good_for_ar": "تقسيم فيديو طويل لأجزاء",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/chapter-title` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
+  },
+  {
+   "id": "quote-card",
+   "category": "explain",
+   "category_ar": "شرح الأفكار",
+   "source": "hyperframes",
+   "description_ar": "كارطة فيها علامة اقتباس كبيرة، الجملة والسمية ديال صاحبها",
+   "good_for_ar": "جملة ديال زبون، كتاب ولا رأي",
+   "effects_options": null,
+   "how": "hyperframes — template `templates/quote-card` in `hyperframes-motion-library`: render it transparent (MOV/WebM) and overlay it, or rebuild it in Remotion in the Web Astra colours."
   }
  ]
 }
